@@ -33,7 +33,103 @@
   --c-results:#ffefc0;
   --c-problems:#ffc67a;
 }
+  /* Base glowing triangle used across all tabs */
+.ac-icon {
+  color: var(--ink);
+  text-shadow:
+    0 0 6px var(--gold),
+    0 0 12px var(--gold),
+    0 0 18px var(--gold);
+  transition: 0.25s ease;
+}
+/* Glow per level */
+.level-adv .ac-icon {
+  color: var(--c-adv);
+  text-shadow:
+    0 0 6px var(--c-adv),
+    0 0 12px var(--c-adv),
+    0 0 20px var(--c-adv);
+}
 
+.level-ricu .ac-icon {
+  color: var(--c-ricu);
+  text-shadow:
+    0 0 6px var(--c-ricu),
+    0 0 12px var(--c-ricu),
+    0 0 20px var(--c-ricu);
+}
+
+.level-items .ac-icon {
+  color: var(--c-items);
+  text-shadow:
+    0 0 6px var(--c-items),
+    0 0 12px var(--c-items),
+    0 0 20px var(--c-items);
+}
+
+.level-results .ac-icon {
+  color: var(--c-results);
+  text-shadow:
+    0 0 6px var(--c-results),
+    0 0 12px var(--c-results),
+    0 0 20px var(--c-results);
+}
+
+.level-problems .ac-icon {
+  color: var(--c-problems);
+  text-shadow:
+    0 0 6px var(--c-problems),
+    0 0 12px var(--c-problems),
+    0 0 20px var(--c-problems);
+}
+
+.level-preschool .ac-icon {
+  color: var(--c-preschool);
+  text-shadow:
+    0 0 6px var(--c-preschool),
+    0 0 12px var(--c-preschool),
+    0 0 20px var(--c-preschool);
+}
+
+.level-es1 .ac-icon {
+  color: var(--c-es1);
+  text-shadow:
+    0 0 6px var(--c-es1),
+    0 0 12px var(--c-es1),
+    0 0 20px var(--c-es1);
+}
+
+.level-es2 .ac-icon {
+  color: var(--c-es2);
+  text-shadow:
+    0 0 6px var(--c-es2),
+    0 0 12px var(--c-es2),
+    0 0 20px var(--c-es2);
+}
+
+.level-jhs .ac-icon {
+  color: var(--c-jhs);
+  text-shadow:
+    0 0 6px var(--c-jhs),
+    0 0 12px var(--c-jhs),
+    0 0 20px var(--c-jhs);
+}
+
+.level-hs .ac-icon {
+  color: var(--c-hs);
+  text-shadow:
+    0 0 6px var(--c-hs),
+    0 0 12px var(--c-hs),
+    0 0 20px var(--c-hs);
+}
+
+.level-adult .ac-icon {
+  color: var(--c-adult);
+  text-shadow:
+    0 0 6px var(--c-adult),
+    0 0 12px var(--c-adult),
+    0 0 20px var(--c-adult);
+}
 /* Reset & base layout */
 *{box-sizing:border-box;margin:0;padding:0;}
 
