@@ -36,13 +36,15 @@
 
 /* Base glowing triangle used across all tabs */
 .ac-icon {
+  font-size:1.4rem;
   color: var(--ink);
   text-shadow:
     0 0 6px var(--gold),
     0 0 12px var(--gold),
     0 0 18px var(--gold);
-  transition: 0.25s ease;
+  transition:transform .25s ease,color .25s ease;
 }
+
 /* Glow per level */
 .level-adv .ac-icon {
   color: var(--c-adv);
@@ -124,9 +126,11 @@
 
 /* Reset & base layout */
 *{box-sizing:border-box;margin:0;padding:0;}
+
 html,body{
   min-height:100%;
 }
+
 body{
   font-family:"Noto Sans JP",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
   background:radial-gradient(circle at top,#0a1122 0,#050814 60%,#000 100%);
@@ -141,12 +145,17 @@ body{
   display:none;
 }
 
+/* Language toggle base visibility */
+.lang-ja{display:block;}
+.lang-en{display:none;}
+
 /* Page wrapper */
 .page{
   max-width:var(--maxWidth);
   margin:0 auto;
   padding:24px 16px 120px;
 }
+
 @media (max-width:768px){
   .page{padding:20px 12px 140px;}
 }
@@ -198,6 +207,7 @@ body{
   margin-bottom:20px;
   padding:10px 8px 4px;
 }
+
 .title-main{
   font-size:2rem;
   letter-spacing:.04em;
@@ -217,39 +227,21 @@ body{
 .title-main .lang-en{
   font-family:'Cinzel', serif;
   font-weight:700;
-  text-align:center;
 }
 
-/* --- GLOBAL LANGUAGE VISIBILITY (outside title) --- */
-.lang-ja{display:block;}
-.lang-en{display:none;}
-
-/* --- TITLE-SPECIFIC VISIBILITY (OVERRIDES ABOVE) --- */
-
-/* Default desktop: show one-line JP, hide 3-line JP */
+/* JAPANESE TITLE: one-line desktop, three-line mobile */
 .title-main-ja-desktop{
-  display:inline-block;
+  display:inline;      /* visible on desktop */
 }
 .title-main-ja-mobile{
-  display:none;
+  display:none;        /* hidden on desktop */
 }
 
-/* English title: 3 lines, only when English is active */
+/* ENGLISH TITLE: always 3 lines */
 .title-main-en-mobile{
   display:inline-block;
 }
 
-/* Mobile: swap JP variants */
-@media (max-width:600px){
-  .title-main-ja-desktop{
-    display:none;
-  }
-  .title-main-ja-mobile{
-    display:inline-block;
-  }
-}
-
-/* Subtitle */
 .title-sub{
   font-size:.95rem;
   color:var(--muted);
@@ -327,6 +319,7 @@ body{
     0 0 20px rgba(15,23,42,.9),
     0 0 32px rgba(15,23,42,.8);
 }
+
 .accordion-item summary{
   list-style:none;
 }
@@ -342,17 +335,20 @@ body{
   padding:12px 18px;
   cursor:pointer;
 }
+
 .ac-labels{
   display:flex;
   flex-direction:column;
   align-items:flex-start;
   text-align:left;
 }
+
 .ac-mainlabel{
   font-size:1.02rem;
   font-weight:600;
   color:var(--ink);
 }
+
 .ac-sublabel{
   font-size:.82rem;
   color:var(--muted);
@@ -380,7 +376,6 @@ body{
 }
 .accordion-item details[open] .ac-icon{
   transform:rotate(90deg);
-  color:var(--accentSoft);
 }
 
 /* Headings inside body */
@@ -390,6 +385,7 @@ body{
   color:var(--ink);
   font-weight:600;
 }
+
 .ac-inner ul{
   margin-left:1.2rem;
   margin-top:4px;
@@ -404,6 +400,7 @@ body{
 .level-items .ac-mainlabel{color:var(--c-items);}
 .level-results .ac-mainlabel{color:var(--c-results);}
 .level-problems .ac-mainlabel{color:var(--c-problems);}
+
 .level-preschool .ac-mainlabel{color:var(--c-preschool);}
 .level-es1 .ac-mainlabel{color:var(--c-es1);}
 .level-es2 .ac-mainlabel{color:var(--c-es2);}
@@ -411,88 +408,81 @@ body{
 .level-hs .ac-mainlabel{color:var(--c-hs);}
 .level-adult .ac-mainlabel{color:var(--c-adult);}
 
-/* Section-specific glows */
+/* Section-specific glows (subtle Booha colors) */
 .level-adv details[open]{
   border-color:var(--c-adv);
   box-shadow:
     0 0 14px color-mix(in srgb,var(--c-adv) 60%, transparent),
     0 0 40px color-mix(in srgb,var(--c-adv) 30%, #020617 70%);
 }
-.level-adv details[open] .ac-icon{color:var(--c-adv);}
 .level-ricu details[open]{
   border-color:var(--c-ricu);
   box-shadow:
     0 0 14px color-mix(in srgb,var(--c-ricu) 60%, transparent),
     0 0 40px color-mix(in srgb,var(--c-ricu) 30%, #020617 70%);
 }
-.level-ricu details[open] .ac-icon{color:var(--c-ricu);}
 .level-items details[open]{
   border-color:var(--c-items);
   box-shadow:
     0 0 14px color-mix(in srgb,var(--c-items) 55%, transparent),
     0 0 40px color-mix(in srgb,var(--c-items) 28%, #020617 72%);
 }
-.level-items details[open] .ac-icon{color:var(--c-items);}
 .level-results details[open]{
   border-color:var(--c-results);
   box-shadow:
     0 0 14px color-mix(in srgb,var(--c-results) 55%, transparent),
     0 0 40px color-mix(in srgb,var(--c-results) 28%, #020617 72%);
 }
-.level-results details[open] .ac-icon{color:var(--c-results);}
 .level-problems details[open]{
   border-color:var(--c-problems);
   box-shadow:
     0 0 14px color-mix(in srgb,var(--c-problems) 55%, transparent),
     0 0 40px color-mix(in srgb,var(--c-problems) 28%, #020617 72%);
 }
-.level-problems details[open] .ac-icon{color:var(--c-problems);}
 .level-preschool details[open]{
   border-color:var(--c-preschool);
   box-shadow:
     0 0 14px color-mix(in srgb,var(--c-preschool) 55%, transparent),
     0 0 40px color-mix(in srgb,var(--c-preschool) 28%, #020617 72%);
 }
-.level-preschool details[open] .ac-icon{color:var(--c-preschool);}
 .level-es1 details[open]{
   border-color:var(--c-es1);
   box-shadow:
     0 0 14px color-mix(in srgb,var(--c-es1) 55%, transparent),
     0 0 40px color-mix(in srgb,var(--c-es1) 28%, #020617 72%);
 }
-.level-es1 details[open] .ac-icon{color:var(--c-es1);}
 .level-es2 details[open]{
   border-color:var(--c-es2);
   box-shadow:
     0 0 14px color-mix(in srgb,var(--c-es2) 55%, transparent),
     0 0 40px color-mix(in srgb,var(--c-es2) 28%, #020617 72%);
 }
-.level-es2 details[open] .ac-icon{color:var(--c-es2);}
 .level-jhs details[open]{
   border-color:var(--c-jhs);
   box-shadow:
     0 0 14px color-mix(in srgb,var(--c-jhs) 55%, transparent),
     0 0 40px color-mix(in srgb,var(--c-jhs) 28%, #020617 72%);
 }
-.level-jhs details[open] .ac-icon{color:var(--c-jhs);}
 .level-hs details[open]{
   border-color:var(--c-hs);
   box-shadow:
     0 0 14px color-mix(in srgb,var(--c-hs) 55%, transparent),
     0 0 40px color-mix(in srgb,var(--c-hs) 28%, #020617 72%);
 }
-.level-hs details[open] .ac-icon{color:var(--c-hs);}
 .level-adult details[open]{
   border-color:var(--c-adult);
   box-shadow:
     0 0 14px color-mix(in srgb,var(--c-adult) 55%, transparent),
     0 0 40px color-mix(in srgb,var(--c-adult) 28%, #020617 72%);
 }
-.level-adult details[open] .ac-icon{color:var(--c-adult);}
 
-/* Mobile tweaks */
+/* Mobile tweaks: swap JP title to 3 lines on small screens */
 @media (max-width:768px){
   .title-main{font-size:1.6rem;}
+
+  .title-main-ja-desktop{display:none;}
+  .title-main-ja-mobile{display:inline;}
+
   .ac-header{padding:14px 14px;}
   .ac-mainlabel{font-size:1rem;}
   .ac-sublabel{font-size:.8rem;}
@@ -565,6 +555,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </span>
     </div>
   </div>
+
   <!-- Language toggle UI -->
   <div class="lang-toggle">
     <label for="lang-ja">日本語</label>
