@@ -33,7 +33,8 @@
   --c-results:#ffefc0;
   --c-problems:#ffc67a;
 }
-  /* Base glowing triangle used across all tabs */
+
+/* Base glowing triangle used across all tabs */
 .ac-icon {
   color: var(--ink);
   text-shadow:
@@ -50,7 +51,6 @@
     0 0 12px var(--c-adv),
     0 0 20px var(--c-adv);
 }
-
 .level-ricu .ac-icon {
   color: var(--c-ricu);
   text-shadow:
@@ -58,7 +58,6 @@
     0 0 12px var(--c-ricu),
     0 0 20px var(--c-ricu);
 }
-
 .level-items .ac-icon {
   color: var(--c-items);
   text-shadow:
@@ -66,7 +65,6 @@
     0 0 12px var(--c-items),
     0 0 20px var(--c-items);
 }
-
 .level-results .ac-icon {
   color: var(--c-results);
   text-shadow:
@@ -74,7 +72,6 @@
     0 0 12px var(--c-results),
     0 0 20px var(--c-results);
 }
-
 .level-problems .ac-icon {
   color: var(--c-problems);
   text-shadow:
@@ -82,7 +79,6 @@
     0 0 12px var(--c-problems),
     0 0 20px var(--c-problems);
 }
-
 .level-preschool .ac-icon {
   color: var(--c-preschool);
   text-shadow:
@@ -90,7 +86,6 @@
     0 0 12px var(--c-preschool),
     0 0 20px var(--c-preschool);
 }
-
 .level-es1 .ac-icon {
   color: var(--c-es1);
   text-shadow:
@@ -98,7 +93,6 @@
     0 0 12px var(--c-es1),
     0 0 20px var(--c-es1);
 }
-
 .level-es2 .ac-icon {
   color: var(--c-es2);
   text-shadow:
@@ -106,7 +100,6 @@
     0 0 12px var(--c-es2),
     0 0 20px var(--c-es2);
 }
-
 .level-jhs .ac-icon {
   color: var(--c-jhs);
   text-shadow:
@@ -114,7 +107,6 @@
     0 0 12px var(--c-jhs),
     0 0 20px var(--c-jhs);
 }
-
 .level-hs .ac-icon {
   color: var(--c-hs);
   text-shadow:
@@ -122,7 +114,6 @@
     0 0 12px var(--c-hs),
     0 0 20px var(--c-hs);
 }
-
 .level-adult .ac-icon {
   color: var(--c-adult);
   text-shadow:
@@ -130,13 +121,12 @@
     0 0 12px var(--c-adult),
     0 0 20px var(--c-adult);
 }
+
 /* Reset & base layout */
 *{box-sizing:border-box;margin:0;padding:0;}
-
 html,body{
   min-height:100%;
 }
-
 body{
   font-family:"Noto Sans JP",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
   background:radial-gradient(circle at top,#0a1122 0,#050814 60%,#000 100%);
@@ -157,7 +147,6 @@ body{
   margin:0 auto;
   padding:24px 16px 120px;
 }
-
 @media (max-width:768px){
   .page{padding:20px 12px 140px;}
 }
@@ -209,7 +198,6 @@ body{
   margin-bottom:20px;
   padding:10px 8px 4px;
 }
-
 .title-main{
   font-size:2rem;
   letter-spacing:.04em;
@@ -226,46 +214,43 @@ body{
   font-weight:700;
   letter-spacing:0.08em;
 }
-
 .title-main .lang-en{
   font-family:'Cinzel', serif;
   font-weight:700;
+  text-align:center;
 }
-  .title-main .lang-en{
-  font-family:'Cinzel', serif;
-  font-weight:700;
-}
-/* --- FIX JAPANESE TITLE DESKTOP/MOBILE VARIANTS --- */
 
-/* Override global .lang-ja{display:block;} inside the title only */
+/* --- TITLE LANGUAGE BEHAVIOR (NO DOUBLE JP) --- */
+
+/* Base: prevent global .lang-ja block from messing with title layout */
 .title-main .lang-ja {
   display:inline-block;
 }
 
-/* Desktop: show one-line JP, hide 3-line JP */
-.title-main-ja-desktop {
+/* Desktop JP: show one-line, hide three-line */
+#lang-ja:checked ~ .page .title-main-ja-desktop {
   display:inline-block;
 }
-.title-main-ja-mobile {
+#lang-ja:checked ~ .page .title-main-ja-mobile {
   display:none;
 }
 
-/* Mobile: swap visibility */
-@media (max-width: 600px) {
-  .title-main-ja-desktop {
+/* Mobile JP: swap versions */
+@media (max-width:600px) {
+  #lang-ja:checked ~ .page .title-main-ja-desktop {
     display:none;
   }
-  .title-main-ja-mobile {
+  #lang-ja:checked ~ .page .title-main-ja-mobile {
     display:inline-block;
   }
 }
 
-
-/* Desktop / mobile variants for EN title */
+/* EN title: always fine when English is active */
 .title-main-en-mobile{
-  display:none;
+  display:inline-block;
 }
 
+/* Subtitle */
 .title-sub{
   font-size:.95rem;
   color:var(--muted);
@@ -347,7 +332,6 @@ body{
     0 0 20px rgba(15,23,42,.9),
     0 0 32px rgba(15,23,42,.8);
 }
-
 .accordion-item summary{
   list-style:none;
 }
@@ -363,30 +347,20 @@ body{
   padding:12px 18px;
   cursor:pointer;
 }
-
 .ac-labels{
   display:flex;
   flex-direction:column;
   align-items:flex-start;
   text-align:left;
 }
-
 .ac-mainlabel{
   font-size:1.02rem;
   font-weight:600;
   color:var(--ink);
 }
-
 .ac-sublabel{
   font-size:.82rem;
   color:var(--muted);
-}
-
-/* Simple arrow */
-.ac-icon{
-  font-size:1.4rem;
-  color:var(--muted);
-  transition:transform .25s ease,color .25s ease;
 }
 
 /* Body */
@@ -421,7 +395,6 @@ body{
   color:var(--ink);
   font-weight:600;
 }
-
 .ac-inner ul{
   margin-left:1.2rem;
   margin-top:4px;
@@ -436,7 +409,6 @@ body{
 .level-items .ac-mainlabel{color:var(--c-items);}
 .level-results .ac-mainlabel{color:var(--c-results);}
 .level-problems .ac-mainlabel{color:var(--c-problems);}
-
 .level-preschool .ac-mainlabel{color:var(--c-preschool);}
 .level-es1 .ac-mainlabel{color:var(--c-es1);}
 .level-es2 .ac-mainlabel{color:var(--c-es2);}
@@ -444,7 +416,7 @@ body{
 .level-hs .ac-mainlabel{color:var(--c-hs);}
 .level-adult .ac-mainlabel{color:var(--c-adult);}
 
-/* Section-specific glows (subtle Booha colors) */
+/* Section-specific glows */
 .level-adv details[open]{
   border-color:var(--c-adv);
   box-shadow:
@@ -452,7 +424,6 @@ body{
     0 0 40px color-mix(in srgb,var(--c-adv) 30%, #020617 70%);
 }
 .level-adv details[open] .ac-icon{color:var(--c-adv);}
-
 .level-ricu details[open]{
   border-color:var(--c-ricu);
   box-shadow:
@@ -460,7 +431,6 @@ body{
     0 0 40px color-mix(in srgb,var(--c-ricu) 30%, #020617 70%);
 }
 .level-ricu details[open] .ac-icon{color:var(--c-ricu);}
-
 .level-items details[open]{
   border-color:var(--c-items);
   box-shadow:
@@ -468,7 +438,6 @@ body{
     0 0 40px color-mix(in srgb,var(--c-items) 28%, #020617 72%);
 }
 .level-items details[open] .ac-icon{color:var(--c-items);}
-
 .level-results details[open]{
   border-color:var(--c-results);
   box-shadow:
@@ -476,7 +445,6 @@ body{
     0 0 40px color-mix(in srgb,var(--c-results) 28%, #020617 72%);
 }
 .level-results details[open] .ac-icon{color:var(--c-results);}
-
 .level-problems details[open]{
   border-color:var(--c-problems);
   box-shadow:
@@ -484,7 +452,6 @@ body{
     0 0 40px color-mix(in srgb,var(--c-problems) 28%, #020617 72%);
 }
 .level-problems details[open] .ac-icon{color:var(--c-problems);}
-
 .level-preschool details[open]{
   border-color:var(--c-preschool);
   box-shadow:
@@ -492,7 +459,6 @@ body{
     0 0 40px color-mix(in srgb,var(--c-preschool) 28%, #020617 72%);
 }
 .level-preschool details[open] .ac-icon{color:var(--c-preschool);}
-
 .level-es1 details[open]{
   border-color:var(--c-es1);
   box-shadow:
@@ -500,7 +466,6 @@ body{
     0 0 40px color-mix(in srgb,var(--c-es1) 28%, #020617 72%);
 }
 .level-es1 details[open] .ac-icon{color:var(--c-es1);}
-
 .level-es2 details[open]{
   border-color:var(--c-es2);
   box-shadow:
@@ -508,7 +473,6 @@ body{
     0 0 40px color-mix(in srgb,var(--c-es2) 28%, #020617 72%);
 }
 .level-es2 details[open] .ac-icon{color:var(--c-es2);}
-
 .level-jhs details[open]{
   border-color:var(--c-jhs);
   box-shadow:
@@ -516,7 +480,6 @@ body{
     0 0 40px color-mix(in srgb,var(--c-jhs) 28%, #020617 72%);
 }
 .level-jhs details[open] .ac-icon{color:var(--c-jhs);}
-
 .level-hs details[open]{
   border-color:var(--c-hs);
   box-shadow:
@@ -524,7 +487,6 @@ body{
     0 0 40px color-mix(in srgb,var(--c-hs) 28%, #020617 72%);
 }
 .level-hs details[open] .ac-icon{color:var(--c-hs);}
-
 .level-adult details[open]{
   border-color:var(--c-adult);
   box-shadow:
@@ -536,11 +498,6 @@ body{
 /* Mobile tweaks */
 @media (max-width:768px){
   .title-main{font-size:1.6rem;}
-
-  /* Mobile EN title: 3 lines */
-  .title-main-en-desktop{display:none;}
-  .title-main-en-mobile{display:inline-block;}
-
   .ac-header{padding:14px 14px;}
   .ac-mainlabel{font-size:1rem;}
   .ac-sublabel{font-size:.8rem;}
@@ -548,7 +505,8 @@ body{
 }
 </style>
 </head>
-  <script>
+
+<script>
 document.addEventListener("DOMContentLoaded", function () {
   const detailsList = document.querySelectorAll(".accordion details");
   detailsList.forEach(details => {
@@ -561,6 +519,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+
 <body>
 
 <!-- Global language toggle controls -->
@@ -577,41 +536,40 @@ document.addEventListener("DOMContentLoaded", function () {
     </a>
   </nav>
 
-<!-- Title -->
-<div class="title-box">
-  <div class="title-main">
+  <!-- Title -->
+  <div class="title-box">
+    <div class="title-main">
 
-    <!-- Japanese title: desktop (one line) -->
-    <span class="lang-ja title-main-ja-desktop">
-      ブーハー・アドベンチャーとブー・リキュラム 2026
-    </span>
+      <!-- Japanese title: desktop (one line) -->
+      <span class="lang-ja title-main-ja-desktop">
+        ブーハー・アドベンチャーとブー・リキュラム 2026
+      </span>
 
-    <!-- Japanese title: mobile (three lines) -->
-    <span class="lang-ja title-main-ja-mobile">
-      ブーハー・アドベンチャー<br>
-      とブー・リキュラム<br>
-      2026
-    </span>
+      <!-- Japanese title: mobile (three lines) -->
+      <span class="lang-ja title-main-ja-mobile">
+        ブーハー・アドベンチャー<br>
+        とブー・リキュラム<br>
+        2026
+      </span>
 
-    <!-- English title: three lines -->
-    <span class="lang-en title-main-en-mobile">
-      The Booha Adventure<br>
-      &amp; Boo-riculum<br>
-      2026
-    </span>
+      <!-- English title: three lines -->
+      <span class="lang-en title-main-en-mobile">
+        The Booha Adventure<br>
+        &amp; Boo-riculum<br>
+        2026
+      </span>
 
+    </div>
+
+    <div class="title-sub">
+      <span class="lang-ja">
+        ブーハー・アドベンチャーとブー・リキュラムの使い方、クラスごとの目標と家庭学習のイメージをまとめたガイドです。
+      </span>
+      <span class="lang-en">
+        A guide to how the Booha Adventure and Boo-riculum work, plus realistic goals and home practice ideas for each level.
+      </span>
+    </div>
   </div>
-
-  <div class="title-sub">
-    <span class="lang-ja">
-      ブーハー・アドベンチャーとブー・リキュラムの使い方、クラスごとの目標と家庭学習のイメージをまとめたガイドです。
-    </span>
-    <span class="lang-en">
-      A guide to how the Booha Adventure and Boo-riculum work, plus realistic goals and home practice ideas for each level.
-    </span>
-  </div>
-</div>
-
 
   <!-- Language toggle UI -->
   <div class="lang-toggle">
