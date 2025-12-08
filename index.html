@@ -220,34 +220,33 @@ body{
   text-align:center;
 }
 
-/* --- TITLE LANGUAGE BEHAVIOR (NO DOUBLE JP) --- */
+/* --- GLOBAL LANGUAGE VISIBILITY (outside title) --- */
+.lang-ja{display:block;}
+.lang-en{display:none;}
 
-/* Base: prevent global .lang-ja block from messing with title layout */
-.title-main .lang-ja {
+/* --- TITLE-SPECIFIC VISIBILITY (OVERRIDES ABOVE) --- */
+
+/* Default desktop: show one-line JP, hide 3-line JP */
+.title-main-ja-desktop{
   display:inline-block;
 }
-
-/* Desktop JP: show one-line, hide three-line */
-#lang-ja:checked ~ .page .title-main-ja-desktop {
-  display:inline-block;
-}
-#lang-ja:checked ~ .page .title-main-ja-mobile {
+.title-main-ja-mobile{
   display:none;
 }
 
-/* Mobile JP: swap versions */
-@media (max-width:600px) {
-  #lang-ja:checked ~ .page .title-main-ja-desktop {
-    display:none;
-  }
-  #lang-ja:checked ~ .page .title-main-ja-mobile {
-    display:inline-block;
-  }
-}
-
-/* EN title: always fine when English is active */
+/* English title: 3 lines, only when English is active */
 .title-main-en-mobile{
   display:inline-block;
+}
+
+/* Mobile: swap JP variants */
+@media (max-width:600px){
+  .title-main-ja-desktop{
+    display:none;
+  }
+  .title-main-ja-mobile{
+    display:inline-block;
+  }
 }
 
 /* Subtitle */
@@ -255,10 +254,6 @@ body{
   font-size:.95rem;
   color:var(--muted);
 }
-
-/* Language toggle base visibility */
-.lang-ja{display:block;}
-.lang-en{display:none;}
 
 /* Language toggle buttons */
 .lang-toggle{
@@ -570,6 +565,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </span>
     </div>
   </div>
+
 
   <!-- Language toggle UI -->
   <div class="lang-toggle">
