@@ -423,6 +423,19 @@ body{
 }
 </style>
 </head>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const detailsList = document.querySelectorAll(".accordion details");
+  detailsList.forEach(details => {
+    details.addEventListener("toggle", () => {
+      if (!details.open) return;
+      detailsList.forEach(other => {
+        if (other !== details && other.open) other.open = false;
+      });
+    });
+  });
+});
+</script>
 <body>
 
 <!-- Global language toggle controls -->
@@ -439,31 +452,38 @@ body{
     </a>
   </nav>
 
-  <!-- Title -->
-  <div class="title-box">
-    <div class="title-main">
-      <!-- Japanese title -->
-      <span class="lang-ja">
-        ブーハー・アドベンチャーとブー・リキュラム 2026
-      </span>
+ <!-- Title -->
+<div class="title-box">
+  <div class="title-main">
+    <!-- Japanese title: desktop (one line) -->
+    <span class="lang-ja title-main-ja-desktop">
+      ブーハー・アドベンチャーとブー・リキュラム 2026
+    </span>
 
-      <!-- Mobile-style English title (used for all English views) -->
-      <span class="lang-en title-main-en-mobile">
-        The Booha Adventure<br>
-        &amp; Boo-riculum<br>
-        2026
-      </span>
-    </div>
+    <!-- Japanese title: mobile (three lines) -->
+    <span class="lang-ja title-main-ja-mobile">
+      ブーハー・アドベンチャー<br>
+      とブー・リキュラム<br>
+      2026
+    </span>
 
-    <div class="title-sub">
-      <span class="lang-ja">
-        ブーハー・アドベンチャーとブー・リキュラムの使い方、クラスごとの目標と家庭学習のイメージをまとめたガイドです。
-      </span>
-      <span class="lang-en">
-        A guide to how the Booha Adventure and Boo-riculum work, plus realistic goals and home practice ideas for each level.
-      </span>
-    </div>
+    <!-- English title: three lines (same as before) -->
+    <span class="lang-en title-main-en-mobile">
+      The Booha Adventure<br>
+      &amp; Boo-riculum<br>
+      2026
+    </span>
   </div>
+
+  <div class="title-sub">
+    <span class="lang-ja">
+      ブーハー・アドベンチャーとブー・リキュラムの使い方、クラスごとの目標と家庭学習のイメージをまとめたガイドです。
+    </span>
+    <span class="lang-en">
+      A guide to how the Booha Adventure and Boo-riculum work, plus realistic goals and home practice ideas for each level.
+    </span>
+  </div>
+</div>
 
   <!-- Language toggle UI -->
   <div class="lang-toggle">
