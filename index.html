@@ -231,6 +231,35 @@ body{
   font-family:'Cinzel', serif;
   font-weight:700;
 }
+  .title-main .lang-en{
+  font-family:'Cinzel', serif;
+  font-weight:700;
+}
+/* --- FIX JAPANESE TITLE DESKTOP/MOBILE VARIANTS --- */
+
+/* Override global .lang-ja{display:block;} inside the title only */
+.title-main .lang-ja {
+  display:inline-block;
+}
+
+/* Desktop: show one-line JP, hide 3-line JP */
+.title-main-ja-desktop {
+  display:inline-block;
+}
+.title-main-ja-mobile {
+  display:none;
+}
+
+/* Mobile: swap visibility */
+@media (max-width: 600px) {
+  .title-main-ja-desktop {
+    display:none;
+  }
+  .title-main-ja-mobile {
+    display:inline-block;
+  }
+}
+
 
 /* Desktop / mobile variants for EN title */
 .title-main-en-mobile{
@@ -548,9 +577,10 @@ document.addEventListener("DOMContentLoaded", function () {
     </a>
   </nav>
 
- <!-- Title -->
+<!-- Title -->
 <div class="title-box">
   <div class="title-main">
+
     <!-- Japanese title: desktop (one line) -->
     <span class="lang-ja title-main-ja-desktop">
       ブーハー・アドベンチャーとブー・リキュラム 2026
@@ -563,12 +593,13 @@ document.addEventListener("DOMContentLoaded", function () {
       2026
     </span>
 
-    <!-- English title: three lines (same as before) -->
+    <!-- English title: three lines -->
     <span class="lang-en title-main-en-mobile">
       The Booha Adventure<br>
       &amp; Boo-riculum<br>
       2026
     </span>
+
   </div>
 
   <div class="title-sub">
@@ -580,6 +611,7 @@ document.addEventListener("DOMContentLoaded", function () {
     </span>
   </div>
 </div>
+
 
   <!-- Language toggle UI -->
   <div class="lang-toggle">
