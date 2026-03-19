@@ -1,1393 +1,1163 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-
-<title>ブーハー・アドベンチャーとブー・リキュラム 2026 / The Booha Adventure & Boo-riculum 2026</title>
-<link rel="icon" type="image/png" sizes="32x32" href="BoohaBlue.png">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Booha Adventure &amp; Boo-riculum</title>
+<link rel="icon" type="image/png" href="BoohaBlue.png">
 <link rel="apple-touch-icon" href="BoohaBlue.png">
-
-  
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
 
 <style>
+/* ══════════════════════════════════════════
+   TOKENS
+══════════════════════════════════════════ */
 :root {
-  --dark:#020617;
-  --ink:#f7f7ff;
-  --muted:#c9cbe2;
-  --accent:#7dd3fc;
-  --accentSoft:#4ade80;
-  --gold:#facc6b;
-  --radius:16px;
-  --maxWidth:960px;
+  --bg:        #0b0d1a;
+  --bg2:       #111428;
+  --surface:   #14172a;
+  --card:      #191c30;
+  --card2:     #1e2136;
+  --border:    rgba(255,255,255,.07);
+  --border2:   rgba(255,255,255,.12);
+  --text:      #dddaf0;
+  --muted:     #8a88a8;
+  --ivory:     #f2eee4;
 
-  /* Level colors (tab labels / glows) */
-  --c-preschool:#7fffd0;
-  --c-es1:#63c6ff;
-  --c-es2:#5fe39d;
-  --c-jhs:#ffa852;
-  --c-hs:#ff7fb0;
-  --c-adult:#ffde6f;
+  /* Level palette */
+  --preschool: #7fffd0;
+  --es1:       #5fc8ff;
+  --es2:       #5fe09d;
+  --jhs:       #ffab5e;
+  --hs:        #ff80b4;
+  --adult:     #ffe070;
 
-  --c-adv:#b39cff;
-  --c-ricu:#9fc4ff;
-  --c-items:#f2e9c4;
-  --c-results:#ffefc0;
-  --c-problems:#ffc67a;
-}
+  /* Section palette */
+  --adv:       #b39cff;
+  --ricu:      #8ab8ff;
+  --items:     #f2e6b8;
+  --results:   #ffeab8;
+  --problems:  #ffbe78;
 
-/* Base glowing triangle used across all tabs */
-.ac-icon {
-  font-size:1.4rem;
-  color: var(--ink);
-  text-shadow:
-    0 0 6px var(--gold),
-    0 0 12px var(--gold),
-    0 0 18px var(--gold);
-  transition:transform .25s ease,color .25s ease;
+  --r:         16px;
+  --r2:        10px;
+  --shadow:    0 20px 48px rgba(0,0,0,.5);
+  --shadow2:   0 6px 20px rgba(0,0,0,.35);
 }
 
-/* Glow per level */
-.level-adv .ac-icon {
-  color: var(--c-adv);
-  text-shadow:
-    0 0 6px var(--c-adv),
-    0 0 12px var(--c-adv),
-    0 0 20px var(--c-adv);
-}
-.level-ricu .ac-icon {
-  color: var(--c-ricu);
-  text-shadow:
-    0 0 6px var(--c-ricu),
-    0 0 12px var(--c-ricu),
-    0 0 20px var(--c-ricu);
-}
-.level-items .ac-icon {
-  color: var(--c-items);
-  text-shadow:
-    0 0 6px var(--c-items),
-    0 0 12px var(--c-items),
-    0 0 20px var(--c-items);
-}
-.level-results .ac-icon {
-  color: var(--c-results);
-  text-shadow:
-    0 0 6px var(--c-results),
-    0 0 12px var(--c-results),
-    0 0 20px var(--c-results);
-}
-.level-problems .ac-icon {
-  color: var(--c-problems);
-  text-shadow:
-    0 0 6px var(--c-problems),
-    0 0 12px var(--c-problems),
-    0 0 20px var(--c-problems);
-}
-.level-preschool .ac-icon {
-  color: var(--c-preschool);
-  text-shadow:
-    0 0 6px var(--c-preschool),
-    0 0 12px var(--c-preschool),
-    0 0 20px var(--c-preschool);
-}
-.level-es1 .ac-icon {
-  color: var(--c-es1);
-  text-shadow:
-    0 0 6px var(--c-es1),
-    0 0 12px var(--c-es1),
-    0 0 20px var(--c-es1);
-}
-.level-es2 .ac-icon {
-  color: var(--c-es2);
-  text-shadow:
-    0 0 6px var(--c-es2),
-    0 0 12px var(--c-es2),
-    0 0 20px var(--c-es2);
-}
-.level-jhs .ac-icon {
-  color: var(--c-jhs);
-  text-shadow:
-    0 0 6px var(--c-jhs),
-    0 0 12px var(--c-jhs),
-    0 0 20px var(--c-jhs);
-}
-.level-hs .ac-icon {
-  color: var(--c-hs);
-  text-shadow:
-    0 0 6px var(--c-hs),
-    0 0 12px var(--c-hs),
-    0 0 20px var(--c-hs);
-}
-.level-adult .ac-icon {
-  color: var(--c-adult);
-  text-shadow:
-    0 0 6px var(--c-adult),
-    0 0 12px var(--c-adult),
-    0 0 20px var(--c-adult);
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Reset & base layout */
-*{box-sizing:border-box;margin:0;padding:0;}
-
-html,body{
-  min-height:100%;
+/* Subtle grid texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
 }
 
-body{
-  font-family:"Noto Sans JP",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
-  background:radial-gradient(circle at top,#0a1122 0,#050814 60%,#000 100%);
-  color:var(--ink);
-  line-height:1.75;
-  -webkit-font-smoothing:antialiased;
+/* Warm glow orbs */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 700px 500px at 80% 5%,  rgba(179,156,255,.055) 0%, transparent 60%),
+    radial-gradient(ellipse 600px 400px at 5%  30%,  rgba(95,200,255,.04)  0%, transparent 55%),
+    radial-gradient(ellipse 500px 400px at 60% 90%,  rgba(255,160,78,.04)  0%, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Language radios (global JP/EN toggle) */
-#lang-ja,
-#lang-en{
-  display:none;
+.wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 28px 20px 120px;
+  position: relative;
+  z-index: 1;
 }
 
-/* Language toggle base visibility */
-.lang-ja{display:block;}
-.lang-en{display:none;}
+/* ── Back nav ── */
+.top-nav {
+  margin-bottom: 20px;
+}
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border2);
+  background: var(--surface);
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color .15s, border-color .15s, transform .12s;
+}
+.back-btn:hover {
+  color: var(--ivory);
+  border-color: rgba(255,255,255,.22);
+  transform: translateX(-2px);
+}
+.back-btn svg { flex-shrink: 0; }
 
-/* Page wrapper */
-.page{
-  max-width:var(--maxWidth);
-  margin:0 auto;
-  padding:24px 16px 120px;
+/* ── Header ── */
+.page-header {
+  text-align: center;
+  padding: 36px 20px 28px;
+  position: relative;
 }
-
-@media (max-width:768px){
-  .page{padding:20px 12px 140px;}
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--adv), transparent);
 }
-
-/* Top nav (back button) */
-.top-nav{
-  display:flex;
-  justify-content:flex-start;
-  margin-bottom:16px;
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--adv);
+  margin-bottom: 14px;
 }
-.back-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:8px 16px;
-  border-radius:999px;
-  border:1px solid rgba(148,163,184,.6);
-  background:radial-gradient(circle at top left,#0f172a,#020617 60%,#000 100%);
-  color:var(--ink);
-  font-size:0.9rem;
-  text-decoration:none;
-  cursor:pointer;
-  box-shadow:
-    0 0 12px rgba(148,163,184,.4),
-    0 0 24px rgba(15,23,42,.9);
-  transition:
-    background .25s ease,
-    box-shadow .25s ease,
-    transform .1s ease,
-    border-color .25s ease;
+.page-title {
+  font-family: 'Spectral', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(24px, 4vw, 40px);
+  color: var(--ivory);
+  line-height: 1.15;
+  letter-spacing: -.2px;
+  margin-bottom: 14px;
 }
-.back-btn::before{
-  content:"←";
-  font-family:'Cinzel', serif;
-  font-size:0.95rem;
-}
-.back-btn:hover{
-  border-color:var(--accent);
-  background:radial-gradient(circle at top left,#0ea5e9,#020617 70%,#000 100%);
-  box-shadow:
-    0 0 16px rgba(56,189,248,.8),
-    0 0 40px rgba(15,23,42,.9);
-  transform:translateY(-1px);
-}
-
-/* Title */
-.title-box{
-  text-align:center;
-  margin-bottom:20px;
-  padding:10px 8px 4px;
-}
-
-.title-main{
-  font-size:2rem;
-  letter-spacing:.04em;
-  color:var(--gold);
-  text-shadow:0 0 12px rgba(250,204,21,.6),
-              0 0 32px rgba(56,189,248,.3);
-  margin-bottom:6px;
-  line-height:1.35;
+.page-title.jp { font-family: 'Noto Sans JP', sans-serif; font-weight: 700; font-size: clamp(20px, 3.5vw, 34px); line-height: 1.35; }
+.page-sub {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 540px;
+  margin: 0 auto;
 }
 
-/* JP = Noto Sans JP, EN = Cinzel */
-.title-main .lang-ja{
-  font-family:'Noto Sans JP', sans-serif;
-  font-weight:700;
-  letter-spacing:0.08em;
+/* ── Language pill ── */
+.lang-pill {
+  display: flex;
+  justify-content: center;
+  margin: 22px 0 32px;
 }
-.title-main .lang-en{
-  font-family:'Cinzel', serif;
-  font-weight:700;
+.lang-inner {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 999px;
+  padding: 3px;
 }
-
-/* JAPANESE TITLE: one-line desktop, three-line mobile */
-.title-main-ja-desktop{
-  display:inline;      /* visible on desktop */
+.langBtn {
+  padding: 7px 24px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .18s ease;
+  letter-spacing: .3px;
 }
-.title-main-ja-mobile{
-  display:none;        /* hidden on desktop */
-}
-
-/* ENGLISH TITLE: always 3 lines */
-.title-main-en-mobile{
-  display:inline-block;
-}
-
-.title-sub{
-  font-size:.95rem;
-  color:var(--muted);
-}
-
-/* Language toggle buttons */
-.lang-toggle{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin:16px 0 22px;
-}
-.lang-toggle label{
-  border-radius:999px;
-  border:1px solid rgba(148,163,184,.5);
-  background:linear-gradient(135deg, rgba(15,23,42,.95), rgba(15,23,42,.7));
-  padding:6px 16px;
-  font-size:.85rem;
-  color:var(--muted);
-  cursor:pointer;
-  min-width:90px;
-  text-align:center;
-  transition:
-    background .25s ease,
-    color .25s ease,
-    box-shadow .25s ease,
-    border-color .25s ease,
-    transform .1s ease;
+.langBtn.active {
+  background: var(--card2);
+  color: var(--ivory);
+  box-shadow: 0 2px 10px rgba(0,0,0,.4);
 }
 
-/* When Japanese is active */
-#lang-ja:checked ~ .page .lang-ja{display:block;}
-#lang-ja:checked ~ .page .lang-en{display:none;}
-#lang-ja:checked ~ .page .lang-toggle label[for="lang-ja"]{
-  color:#e5e7eb;
-  border-color:var(--accent);
-  box-shadow:
-    0 0 12px rgba(125,211,252,.9),
-    0 0 32px rgba(168,85,247,.4);
-  background:radial-gradient(circle at top left,#0ea5e9,#1d4ed8 42%,#020617 100%);
-  transform:translateY(-1px);
+/* ══════════════════════════════════════════
+   SECTION GROUPS
+══════════════════════════════════════════ */
+.section-group {
+  margin-bottom: 36px;
+}
+.group-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.group-label span {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.group-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
 }
 
-/* When English is active */
-#lang-en:checked ~ .page .lang-ja{display:none;}
-#lang-en:checked ~ .page .lang-en{display:block;}
-#lang-en:checked ~ .page .lang-toggle label[for="lang-en"]{
-  color:#e5e7eb;
-  border-color:var(--accent);
-  box-shadow:
-    0 0 12px rgba(125,211,252,.9),
-    0 0 32px rgba(168,85,247,.4);
-  background:radial-gradient(circle at top left,#0ea5e9,#1d4ed8 42%,#020617 100%);
-  transform:translateY(-1px);
+/* ══════════════════════════════════════════
+   ACCORDION
+══════════════════════════════════════════ */
+.acc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-/* Accordion container */
-.accordion{
-  margin-top:12px;
+.acc-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  transition: border-color .2s, box-shadow .2s;
+}
+.acc-item.open {
+  box-shadow: var(--shadow2);
 }
 
-/* Each item */
-.accordion-item{
-  margin-bottom:14px;
+/* Color theming per section */
+.acc-item[data-color="adv"]      { --c: var(--adv); }
+.acc-item[data-color="ricu"]     { --c: var(--ricu); }
+.acc-item[data-color="items"]    { --c: var(--items); }
+.acc-item[data-color="results"]  { --c: var(--results); }
+.acc-item[data-color="problems"] { --c: var(--problems); }
+.acc-item[data-color="pre"]      { --c: var(--preschool); }
+.acc-item[data-color="es1"]      { --c: var(--es1); }
+.acc-item[data-color="es2"]      { --c: var(--es2); }
+.acc-item[data-color="jhs"]      { --c: var(--jhs); }
+.acc-item[data-color="hs"]       { --c: var(--hs); }
+.acc-item[data-color="adult"]    { --c: var(--adult); }
+
+.acc-item.open {
+  border-color: color-mix(in srgb, var(--c) 45%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 12%, transparent),
+              0 12px 32px rgba(0,0,0,.4);
 }
 
-/* Native details/summary styling */
-.accordion-item details{
-  margin:0;
-  padding:0;
-  border-radius:var(--radius);
-  border:1px solid rgba(148,163,184,.5);
-  background:linear-gradient(145deg, rgba(15,23,42,.98), rgba(15,23,42,.86));
-  box-shadow:
-    0 0 20px rgba(15,23,42,.9),
-    0 0 32px rgba(15,23,42,.8);
+.acc-btn {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 18px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  transition: background .15s;
+}
+.acc-item.open .acc-btn {
+  background: rgba(255,255,255,.02);
 }
 
-.accordion-item summary{
-  list-style:none;
+/* Color stripe on left */
+.acc-stripe {
+  width: 3px;
+  height: 36px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--c) 60%, transparent);
+  flex-shrink: 0;
+  transition: height .2s, background .2s;
 }
-.accordion-item summary::-webkit-details-marker{
-  display:none;
-}
-
-/* Header (summary content) */
-.ac-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:12px 18px;
-  cursor:pointer;
-}
-
-.ac-labels{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  text-align:left;
+.acc-item.open .acc-stripe {
+  height: 44px;
+  background: var(--c);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--c) 50%, transparent);
 }
 
-.ac-mainlabel{
-  font-size:1.02rem;
-  font-weight:600;
-  color:var(--ink);
+.acc-label { flex: 1; min-width: 0; }
+.acc-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--c);
+  margin-bottom: 3px;
+}
+.acc-title {
+  font-family: 'Spectral', Georgia, serif;
+  font-weight: 600;
+  font-size: 16.5px;
+  color: var(--ivory);
+  line-height: 1.2;
+  letter-spacing: -.1px;
+}
+.jp .acc-title {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+.acc-sub {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-top: 2px;
 }
 
-.ac-sublabel{
-  font-size:.82rem;
-  color:var(--muted);
+.acc-icon {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border2);
+  background: var(--card);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  font-size: 15px;
+  color: var(--muted);
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1), background .18s, color .18s, border-color .18s;
+}
+.acc-item.open .acc-icon {
+  transform: rotate(45deg);
+  background: color-mix(in srgb, var(--c) 15%, transparent);
+  border-color: color-mix(in srgb, var(--c) 40%, transparent);
+  color: var(--c);
 }
 
-/* Body */
-.ac-body{
-  padding:0 18px;
+/* Panel */
+.acc-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .38s cubic-bezier(.4,0,.2,1);
 }
-.ac-inner{
-  padding:10px 0 6px;
-  font-size:.93rem;
-  color:var(--muted);
+.acc-item.open .acc-panel { max-height: 9999px; }
+
+.acc-panel-inner {
+  padding: 0 20px 22px 20px;
+}
+/* indent to align with title text */
+.acc-panel-inner-padded {
+  padding-left: 37px; /* stripe(3) + gap(14) + stripe-offset */
 }
 
-/* Base open state glow (fallback) */
-.accordion-item details[open]{
-  border-color:var(--accent);
-  box-shadow:
-    0 0 14px rgba(125,211,252,.5),
-    0 0 40px rgba(59,130,246,.35);
+.panel-body {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 2px solid color-mix(in srgb, var(--c) 50%, transparent);
+  border-radius: var(--r2);
+  padding: 20px 20px;
+  font-size: 14px;
+  color: #c8c5e0;
+  line-height: 1.85;
 }
-.accordion-item details[open] .ac-body{
-  padding-bottom:12px;
-}
-.accordion-item details[open] .ac-icon{
-  transform:rotate(90deg);
-}
-
-/* Headings inside body */
-.ac-inner h3{
-  margin:10px 0 4px;
-  font-size:1rem;
-  color:var(--ink);
-  font-weight:600;
+.jp .panel-body {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13.5px;
+  line-height: 2;
 }
 
-.ac-inner ul{
-  margin-left:1.2rem;
-  margin-top:4px;
+.panel-body h3 {
+  font-family: 'Spectral', serif;
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--ivory);
+  margin: 18px 0 6px;
+  letter-spacing: -.1px;
 }
-.ac-inner li{
-  margin-bottom:4px;
+.jp .panel-body h3 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13.5px;
+}
+.panel-body h3:first-child { margin-top: 0; }
+
+.panel-body p { margin-bottom: 10px; }
+.panel-body p:last-child { margin-bottom: 0; }
+
+.panel-body strong { color: var(--ivory); font-weight: 600; }
+
+.panel-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 10px;
+}
+.panel-body ul li {
+  padding: 5px 0 5px 16px;
+  position: relative;
+  font-size: 13.5px;
+  color: #b8b5d4;
+  border-bottom: 1px solid var(--border);
+}
+.jp .panel-body ul li { font-family: 'Noto Sans JP', sans-serif; }
+.panel-body ul li:last-child { border-bottom: none; }
+.panel-body ul li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--c);
+  opacity: .65;
 }
 
-/* Color-coding by section (tab label color) */
-.level-adv .ac-mainlabel{color:var(--c-adv);}
-.level-ricu .ac-mainlabel{color:var(--c-ricu);}
-.level-items .ac-mainlabel{color:var(--c-items);}
-.level-results .ac-mainlabel{color:var(--c-results);}
-.level-problems .ac-mainlabel{color:var(--c-problems);}
+/* Two-col list on wider screens */
+.two-col { columns: 2; column-gap: 24px; }
+@media (max-width: 540px) { .two-col { columns: 1; } }
 
-.level-preschool .ac-mainlabel{color:var(--c-preschool);}
-.level-es1 .ac-mainlabel{color:var(--c-es1);}
-.level-es2 .ac-mainlabel{color:var(--c-es2);}
-.level-jhs .ac-mainlabel{color:var(--c-jhs);}
-.level-hs .ac-mainlabel{color:var(--c-hs);}
-.level-adult .ac-mainlabel{color:var(--c-adult);}
+/* Results table */
+.r-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 13px;
+}
+.r-table th {
+  text-align: left;
+  color: var(--muted);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.r-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--border);
+  color: #c8c5e0;
+}
+.r-table td:last-child { color: var(--c); font-weight: 600; }
+.r-table tr:last-child td { border-bottom: none; }
 
-/* Section-specific glows (subtle Booha colors) */
-.level-adv details[open]{
-  border-color:var(--c-adv);
-  box-shadow:
-    0 0 14px color-mix(in srgb,var(--c-adv) 60%, transparent),
-    0 0 40px color-mix(in srgb,var(--c-adv) 30%, #020617 70%);
+/* Callout */
+.callout {
+  margin-top: 14px;
+  background: color-mix(in srgb, var(--c) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c) 22%, transparent);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--muted);
 }
-.level-ricu details[open]{
-  border-color:var(--c-ricu);
-  box-shadow:
-    0 0 14px color-mix(in srgb,var(--c-ricu) 60%, transparent),
-    0 0 40px color-mix(in srgb,var(--c-ricu) 30%, #020617 70%);
+.callout strong { color: var(--c); }
+
+/* Problem blocks */
+.problem-block {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
 }
-.level-items details[open]{
-  border-color:var(--c-items);
-  box-shadow:
-    0 0 14px color-mix(in srgb,var(--c-items) 55%, transparent),
-    0 0 40px color-mix(in srgb,var(--c-items) 28%, #020617 72%);
+.problem-block:last-child { border-bottom: none; }
+.problem-block .pb-num {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--c);
+  margin-bottom: 3px;
 }
-.level-results details[open]{
-  border-color:var(--c-results);
-  box-shadow:
-    0 0 14px color-mix(in srgb,var(--c-results) 55%, transparent),
-    0 0 40px color-mix(in srgb,var(--c-results) 28%, #020617 72%);
+.problem-block .pb-title {
+  font-family: 'Spectral', serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ivory);
+  margin-bottom: 4px;
 }
-.level-problems details[open]{
-  border-color:var(--c-problems);
-  box-shadow:
-    0 0 14px color-mix(in srgb,var(--c-problems) 55%, transparent),
-    0 0 40px color-mix(in srgb,var(--c-problems) 28%, #020617 72%);
-}
-.level-preschool details[open]{
-  border-color:var(--c-preschool);
-  box-shadow:
-    0 0 14px color-mix(in srgb,var(--c-preschool) 55%, transparent),
-    0 0 40px color-mix(in srgb,var(--c-preschool) 28%, #020617 72%);
-}
-.level-es1 details[open]{
-  border-color:var(--c-es1);
-  box-shadow:
-    0 0 14px color-mix(in srgb,var(--c-es1) 55%, transparent),
-    0 0 40px color-mix(in srgb,var(--c-es1) 28%, #020617 72%);
-}
-.level-es2 details[open]{
-  border-color:var(--c-es2);
-  box-shadow:
-    0 0 14px color-mix(in srgb,var(--c-es2) 55%, transparent),
-    0 0 40px color-mix(in srgb,var(--c-es2) 28%, #020617 72%);
-}
-.level-jhs details[open]{
-  border-color:var(--c-jhs);
-  box-shadow:
-    0 0 14px color-mix(in srgb,var(--c-jhs) 55%, transparent),
-    0 0 40px color-mix(in srgb,var(--c-jhs) 28%, #020617 72%);
-}
-.level-hs details[open]{
-  border-color:var(--c-hs);
-  box-shadow:
-    0 0 14px color-mix(in srgb,var(--c-hs) 55%, transparent),
-    0 0 40px color-mix(in srgb,var(--c-hs) 28%, #020617 72%);
-}
-.level-adult details[open]{
-  border-color:var(--c-adult);
-  box-shadow:
-    0 0 14px color-mix(in srgb,var(--c-adult) 55%, transparent),
-    0 0 40px color-mix(in srgb,var(--c-adult) 28%, #020617 72%);
+.jp .problem-block .pb-title {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
 }
 
-/* Mobile tweaks: swap JP title to 3 lines on small screens */
-@media (max-width:768px){
-  .title-main{font-size:1.6rem;}
+/* ══════════════════════════════════════════
+   LEVEL TABS (grade levels)
+══════════════════════════════════════════ */
+.level-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.level-tab {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border2);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.level-tab:hover { color: var(--ivory); border-color: rgba(255,255,255,.2); }
+.level-tab.active {
+  background: var(--card2);
+  color: var(--ivory);
+  border-color: rgba(255,255,255,.22);
+}
 
-  .title-main-ja-desktop{display:none;}
-  .title-main-ja-mobile{display:inline;}
+/* ── Footer ── */
+.footer {
+  margin-top: 48px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--muted);
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.footer span { color: var(--adv); }
 
-  .ac-header{padding:14px 14px;}
-  .ac-mainlabel{font-size:1rem;}
-  .ac-sublabel{font-size:.8rem;}
-  .ac-inner{font-size:.9rem;}
+/* ── Responsive ── */
+@media (max-width: 580px) {
+  .acc-btn { padding: 15px 14px; }
+  .acc-panel-inner { padding: 0 14px 18px; }
+  .panel-body { padding: 16px; }
+  .acc-title { font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
 }
 </style>
 </head>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const detailsList = document.querySelectorAll(".accordion details");
-  detailsList.forEach(details => {
-    details.addEventListener("toggle", () => {
-      if (!details.open) return;
-      detailsList.forEach(other => {
-        if (other !== details && other.open) other.open = false;
-      });
-    });
-  });
-});
-</script>
-
 <body>
 
-<!-- Global language toggle controls -->
-<input type="radio" name="lang" id="lang-ja" checked>
-<input type="radio" name="lang" id="lang-en">
+<div class="wrap" id="root">
 
-<div class="page">
-
-  <!-- Back to main menu -->
+  <!-- Back nav -->
   <nav class="top-nav">
     <a href="https://www.bryanharper.tokyo" class="back-btn">
-      <span class="lang-ja">教室のメインページに戻る</span>
-      <span class="lang-en">Back to Main Site</span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span id="back-label">教室のメインページに戻る</span>
     </a>
   </nav>
 
-  <!-- Title -->
-  <div class="title-box">
-    <div class="title-main">
+  <!-- Header -->
+  <header class="page-header">
+    <div class="eyebrow">Bryan's English School</div>
+    <h1 class="page-title jp" id="page-title">ブーハー・アドベンチャー<br>&amp; ブー・リキュラム</h1>
+    <p class="page-sub" id="page-sub">ブーハー・アドベンチャーとブー・リキュラムの使い方、クラスごとの目標と家庭学習のイメージをまとめたガイドです。</p>
+  </header>
 
-      <!-- Japanese title: mobile (three lines) -->
-      <span class="lang-ja title-main-ja-mobile">
-        ブーハー・アドベンチャー<br>
-        とブー・リキュラム<br>
-        2026
-      </span>
-
-      <!-- English title: three lines -->
-      <span class="lang-en title-main-en-mobile">
-        The Booha Adventure<br>
-        &amp; Boo-riculum<br>
-        2026
-      </span>
-
-    </div>
-
-    <div class="title-sub">
-      <span class="lang-ja">
-        ブーハー・アドベンチャーとブー・リキュラムの使い方、クラスごとの目標と家庭学習のイメージをまとめたガイドです。
-      </span>
-      <span class="lang-en">
-        A guide to how the Booha Adventure and Boo-riculum work, plus realistic goals and home practice ideas for each level.
-      </span>
+  <!-- Language toggle -->
+  <div class="lang-pill">
+    <div class="lang-inner">
+      <button class="langBtn" id="btnEN" type="button">English</button>
+      <button class="langBtn active" id="btnJP" type="button">日本語</button>
     </div>
   </div>
 
-  <!-- Language toggle UI -->
-  <div class="lang-toggle">
-    <label for="lang-ja">日本語</label>
-    <label for="lang-en">English</label>
+  <!-- ══ GROUP 1: The System ══ -->
+  <div class="section-group">
+    <div class="group-label">
+      <span id="grp1-label">システム</span>
+    </div>
+
+    <div class="acc-list" id="acc-system">
+
+      <!-- 1. Booha Adventure -->
+      <div class="acc-item" data-color="adv">
+        <button class="acc-btn" type="button" aria-expanded="false">
+          <div class="acc-stripe"></div>
+          <div class="acc-label">
+            <div class="acc-tag" data-en="01 — Adventure" data-jp="01 — アドベンチャー">01 — アドベンチャー</div>
+            <div class="acc-title" data-en="What Is the Booha Adventure?" data-jp="ブーハー・アドベンチャーとは？">ブーハー・アドベンチャーとは？</div>
+            <div class="acc-sub" data-en="Our interactive English world, connected to every weekly lesson." data-jp="毎週のレッスンにつながる、インタラクティブな英語ワールドです。">毎週のレッスンにつながる、インタラクティブな英語ワールドです。</div>
+          </div>
+          <div class="acc-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <div class="panel-body">
+              <div class="lang-jp">
+                <p>Booha Adventureは、3つのカリキュラムを備えた週ごとの英語学習システムアプリです。生徒は名前とPINでログインし、その週に必要な英語だけにアクセスします。</p>
+                <p>これは一般的なアプリではありません。広告やおすすめ動画、無駄な機能は一切ありません。AIにも接続されていません。完全にプライベートで、ユーザーの行動を追跡することもなく、すべてのデータはあなたのデバイス内に保存されます。私でさえ、あなたの保存データを見ることはできません。</p>
+                <p>各週のチェックポイントでは、2つのデッキが開きます：</p>
+                <ul>
+                  <li><strong>スタディデッキ</strong> — 単語、文、スピーキング用の質問、そしてハンズフリーのリスニング＆リピート機能（すべて音声付き）</li>
+                  <li><strong>ゲームデッキ</strong> — その週の英語を使う練習ゲーム</li>
+                </ul>
+                <p>ゲームはレッスンの一部です。クリアするためには、学習した英語を使う必要があります。</p>
+              </div>
+              <div class="lang-en" style="display:none">
+                <p>The Booha Adventure is our weekly English system app, containing three full curricula. Students log in with their name and PIN and access only the English they need for that week.</p>
+                <p>This is not a random app space. There are no ads, suggested videos, or distractions. It is not connected to AI. It is private, it does not track users, and all saves stay local on your device. Even I cannot see or read your saved data.</p>
+                <p>Each weekly checkpoint opens two decks:</p>
+                <ul>
+                  <li><strong>Study Deck</strong> — vocabulary, sentences, speaking questions, and a hands-free listen-and-repeat stream, all with full audio</li>
+                  <li><strong>Game Deck</strong> — practice games that use the weekly English</li>
+                </ul>
+                <p>The games are part of the lesson. Students are expected to use the English they studied in order to clear them.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Boo-riculum -->
+      <div class="acc-item" data-color="ricu">
+        <button class="acc-btn" type="button" aria-expanded="false">
+          <div class="acc-stripe"></div>
+          <div class="acc-label">
+            <div class="acc-tag" data-en="02 — Curriculum" data-jp="02 — カリキュラム">02 — カリキュラム</div>
+            <div class="acc-title" data-en="What Is the Boo-riculum?" data-jp="ブー・リキュラムとは？">ブー・リキュラムとは？</div>
+            <div class="acc-sub" data-en="The yearly learning plan behind all the weekly decks (CEFR A1–B2)." data-jp="週ごとのデッキを支える年間カリキュラムです（CEFR A1〜B2）。">週ごとのデッキを支える年間カリキュラムです（CEFR A1〜B2）。</div>
+          </div>
+          <div class="acc-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <div class="panel-body">
+              <div class="lang-jp">
+                <p>Pre-Boo、Boo-riculum、Boo-Continuumは、週ごとのデッキを支える年間カリキュラムです。自分に合ったものを選びます。それぞれが、年間を通してどの英語を学び、どのように復習するかを決めています。</p>
+                <p>1年は12のテーマに分かれ、各月は4週間で構成されています。毎週の流れは同じで、単語、文、質問、スピーキング、ゲーム、そして探検があります。スタート月は決まっていないため、どの週からでも始めることができます。</p>
+                <p>内容は変わりますが、構造は変わりません。これにより、生徒は習慣と自信を身につけます。</p>
+                <p>3つのカリキュラムは、CEFR A1からC2までの実用的な英語力を育てるように設計されています。また、英検5級から1級、学校英語、TOEICの基礎にも対応しています。これはテスト対策だけのシステムではありません。テストの土台となる英語力を育てます。</p>
+              </div>
+              <div class="lang-en" style="display:none">
+                <p>Pre-Boo, Boo-riculum, and Boo-Continuum are the three yearly learning plans behind the weekly decks. You choose the one that best fits your learning needs. Each one decides what English we study across the year and how we review it.</p>
+                <p>The year is divided into 12 themes, and each month has 4 weeks. The weekly pattern stays the same: vocabulary, sentences, questions, speaking, games, and exploring. One of the best parts is that there is no required start month. Any week in the year can be started at any time.</p>
+                <p>The content changes, but the structure does not. This helps students build routine and confidence.</p>
+                <p>The three curricula are designed to build practical English from CEFR A1 to C2. They also support EIKEN 5 to 1, school English, and the foundation needed for TOEIC. This is not a test-prep shortcut system. It builds the English behind the tests.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Required Items -->
+      <div class="acc-item" data-color="items">
+        <button class="acc-btn" type="button" aria-expanded="false">
+          <div class="acc-stripe"></div>
+          <div class="acc-label">
+            <div class="acc-tag" data-en="03 — Requirements" data-jp="03 — 持ち物">03 — 持ち物</div>
+            <div class="acc-title" data-en="What Students Need for Each Lesson" data-jp="レッスンに必要なもの">レッスンに必要なもの</div>
+            <div class="acc-sub" data-en="A device + English notebook. Required for all students." data-jp="デバイス＋英語ノート（全生徒・必須）">デバイス＋英語ノート（全生徒・必須）</div>
+          </div>
+          <div class="acc-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <div class="panel-body">
+              <div class="lang-jp">
+                <p><strong>すべての生徒はデバイスを持参し、自宅で単語を書き、ノートをクラスに持ってきて確認を受ける必要があります。すべての週の内容を書くのが理想です。</strong></p>
+                <p>デバイスがない場合、週ごとのデッキ、音声、ゲームにアクセスできません。レッスンはこのシステムを中心に構成されています。授業中に単語を書き写すことはしません。単語は英語と日本語の意味をセットで自宅で書いてきてください。</p>
+                <ul>
+                  <li>デバイスを持参する</li>
+                  <li>宿題ノートを持参する</li>
+                  <li>最低でも週の単語を書く</li>
+                  <li>授業前に音声を確認する</li>
+                </ul>
+                <p>準備してきた生徒は、授業中に話す・聞く・使うことに集中できます。準備していない生徒は苦労することが多いです。</p>
+              </div>
+              <div class="lang-en" style="display:none">
+                <p><strong>All students must bring a device and complete vocabulary writing at home in a notebook they bring to class for me to check. Writing all of the weekly content is even better.</strong></p>
+                <p>Without a device, students cannot access the weekly decks, audio, or games. The lesson is built around this system. We do not spend class time copying vocabulary. Students are expected to write the weekly vocabulary at home in English with the Japanese meaning.</p>
+                <ul>
+                  <li>Bring a device</li>
+                  <li>Bring your homework notebook</li>
+                  <li>Write at least the weekly vocabulary at home</li>
+                  <li>Review the audio before class</li>
+                </ul>
+                <p>Prepared students can use class time for speaking, listening, and using English. Unprepared students usually struggle.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Results -->
+      <div class="acc-item" data-color="results">
+        <button class="acc-btn" type="button" aria-expanded="false">
+          <div class="acc-stripe"></div>
+          <div class="acc-label">
+            <div class="acc-tag" data-en="04 — Results" data-jp="04 — 成果の目安">04 — 成果の目安</div>
+            <div class="acc-title" data-en="Realistic EIKEN &amp; TOEIC Results" data-jp="英検・TOEICの目安">英検・TOEICの目安</div>
+            <div class="acc-sub" data-en="What students can realistically expect from steady Booha use." data-jp="週ごとの学習でめざせる、現実的な範囲です。">週ごとの学習でめざせる、現実的な範囲です。</div>
+          </div>
+          <div class="acc-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <div class="panel-body">
+              <div class="lang-jp">
+                <p>以下は、週ごとのデッキを使い、自宅で準備を行い、授業にしっかり参加した生徒の現実的な成果です。保証ではありません。</p>
+                <h3>英検</h3>
+                <table class="r-table">
+                  <tr><th>レベル</th><th>目標</th></tr>
+                  <tr><td>小学生</td><td>5級は簡単に。4級は現実的。3級は6年生で可能</td></tr>
+                  <tr><td>中学生</td><td>3級〜準2級が標準的な範囲。2級も可能（しっかり取り組む場合）</td></tr>
+                  <tr><td>高校生</td><td>準2級〜2級が現実的。準1級も可能（真剣に取り組む場合）</td></tr>
+                </table>
+                <h3>TOEIC</h3>
+                <table class="r-table">
+                  <tr><th>レベル</th><th>スコアの目安</th></tr>
+                  <tr><td>中学生</td><td>300〜450</td></tr>
+                  <tr><td>高校生</td><td>400〜650</td></tr>
+                  <tr><td>大人</td><td>450〜650（継続的な学習が前提）</td></tr>
+                </table>
+                <div class="callout">これらの成果は、継続的な取り組みによるものです。テクニックではなく、毎週の積み上げです。</div>
+              </div>
+              <div class="lang-en" style="display:none">
+                <p>These are realistic results for students who use the weekly decks, prepare at home, and participate properly in class. They are not guarantees.</p>
+                <h3>EIKEN</h3>
+                <table class="r-table">
+                  <tr><th>Level</th><th>Realistic target</th></tr>
+                  <tr><td>Elementary</td><td>Grade 5 becomes easy. Grade 4 realistic. Grade 3 by Grade 6</td></tr>
+                  <tr><td>Junior High</td><td>Grade 3 to Pre-2 normal range. Grade 2 possible for strong students</td></tr>
+                  <tr><td>High School</td><td>Pre-2 to 2 realistic. Pre-1 possible for serious students</td></tr>
+                </table>
+                <h3>TOEIC</h3>
+                <table class="r-table">
+                  <tr><th>Level</th><th>Score range</th></tr>
+                  <tr><td>Junior High</td><td>300–450</td></tr>
+                  <tr><td>High School</td><td>400–650</td></tr>
+                  <tr><td>Adults</td><td>450–650 with steady weekly study</td></tr>
+                </table>
+                <div class="callout">These results come from <strong>consistent use</strong>, not tricks or shortcuts.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Common Problems -->
+      <div class="acc-item" data-color="problems">
+        <button class="acc-btn" type="button" aria-expanded="false">
+          <div class="acc-stripe"></div>
+          <div class="acc-label">
+            <div class="acc-tag" data-en="05 — Problems" data-jp="05 — よくあるつまずき">05 — よくあるつまずき</div>
+            <div class="acc-title" data-en="Common Problems (and What They Mean)" data-jp="よくあるつまずき">よくあるつまずき</div>
+            <div class="acc-sub" data-en="Why some students don't progress, even when they keep coming to class." data-jp="なぜ伸びないのか、本当の理由をやさしく説明します。">なぜ伸びないのか、本当の理由をやさしく説明します。</div>
+          </div>
+          <div class="acc-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <div class="panel-body">
+              <div class="lang-jp">
+                <div class="problem-block">
+                  <div class="pb-num">01</div>
+                  <div class="pb-title">準備なし → 話すことがない</div>
+                  <p>週の英語を事前に確認していない生徒は、授業中に話すことがほとんどなく、退屈になりやすいです。ここはアウトプット中心のスクールなので、年齢に関係なく話すことが求められます。準備していないときだけストレスになります。</p>
+                </div>
+                <div class="problem-block">
+                  <div class="pb-num">02</div>
+                  <div class="pb-title">直前の確認だけ</div>
+                  <p>授業直前や移動中の確認は何もしないよりは良いですが、大きな成長にはつながりません。</p>
+                </div>
+                <div class="problem-block">
+                  <div class="pb-num">03</div>
+                  <div class="pb-title">家での練習なし → ずっと"ゼロ"のまま</div>
+                  <p>自宅で学習しない生徒は、毎週同じところでつまずきます。</p>
+                </div>
+                <div class="problem-block">
+                  <div class="pb-num">04</div>
+                  <div class="pb-title">日本語に頼りすぎる</div>
+                  <p>日本語だけで理解し、英語に触れない場合、アウトプット力は育ちません。</p>
+                </div>
+              </div>
+              <div class="lang-en" style="display:none">
+                <div class="problem-block">
+                  <div class="pb-num">01</div>
+                  <div class="pb-title">No preparation</div>
+                  <p>Students who do not preview the weekly English usually have very little to say in class and often become bored. This is an output school, so students of all ages are expected to talk. It is only stressful when they are unprepared.</p>
+                </div>
+                <div class="problem-block">
+                  <div class="pb-num">02</div>
+                  <div class="pb-title">Last-minute review</div>
+                  <p>Reviewing in the car or right before class is better than nothing, but it is not enough for strong progress.</p>
+                </div>
+                <div class="problem-block">
+                  <div class="pb-num">03</div>
+                  <div class="pb-title">No home practice</div>
+                  <p>Students who do not study at home tend to repeat the same struggle every week.</p>
+                </div>
+                <div class="problem-block">
+                  <div class="pb-num">04</div>
+                  <div class="pb-title">Too much Japanese support</div>
+                  <p>If students only understand the content in Japanese and rarely touch the English itself, they do not build output.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- #acc-system -->
+  </div><!-- .section-group -->
+
+  <!-- ══ GROUP 2: By Level ══ -->
+  <div class="section-group">
+    <div class="group-label">
+      <span id="grp2-label">レベル別</span>
+    </div>
+
+    <!-- Level tab strip -->
+    <div class="level-tabs" id="level-tabs" role="tablist">
+      <button class="level-tab active" data-target="acc-pre"   role="tab" style="--tc:var(--preschool)">
+        <span class="lang-jp-text">幼児</span><span class="lang-en-text" style="display:none">Preschool</span>
+      </button>
+      <button class="level-tab" data-target="acc-es1"  role="tab" style="--tc:var(--es1)">
+        <span class="lang-jp-text">小1〜3</span><span class="lang-en-text" style="display:none">Gr. 1–3</span>
+      </button>
+      <button class="level-tab" data-target="acc-es2"  role="tab" style="--tc:var(--es2)">
+        <span class="lang-jp-text">小4〜6</span><span class="lang-en-text" style="display:none">Gr. 4–6</span>
+      </button>
+      <button class="level-tab" data-target="acc-jhs"  role="tab" style="--tc:var(--jhs)">
+        <span class="lang-jp-text">中学生</span><span class="lang-en-text" style="display:none">Jr. High</span>
+      </button>
+      <button class="level-tab" data-target="acc-hs"   role="tab" style="--tc:var(--hs)">
+        <span class="lang-jp-text">高校生</span><span class="lang-en-text" style="display:none">High School</span>
+      </button>
+      <button class="level-tab" data-target="acc-adult" role="tab" style="--tc:var(--adult)">
+        <span class="lang-jp-text">大人</span><span class="lang-en-text" style="display:none">Adults</span>
+      </button>
+    </div>
+
+    <div class="acc-list" id="acc-levels">
+
+      <!-- Preschool -->
+      <div class="acc-item" id="acc-pre" data-color="pre">
+        <button class="acc-btn" type="button" aria-expanded="false">
+          <div class="acc-stripe"></div>
+          <div class="acc-label">
+            <div class="acc-tag" data-en="Preschool" data-jp="幼児クラス（未就学）">幼児クラス（未就学）</div>
+            <div class="acc-title" data-en="Goals &amp; Home Practice" data-jp="目標と家庭学習">目標と家庭学習</div>
+            <div class="acc-sub" data-en="Writing, listening, and building confidence." data-jp="書く力・聞く力・自信を育てる時期です。">書く力・聞く力・自信を育てる時期です。</div>
+          </div>
+          <div class="acc-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <div class="panel-body">
+              <div class="lang-jp">
+                <h3>目標</h3>
+                <ul><li>名前を英語で書ける</li><li>アルファベットの大文字・小文字を書く</li><li>基本的な質問に答えられる</li></ul>
+                <h3>家庭学習（5分以内）</h3>
+                <ul><li>名前を書く練習</li><li>アルファベットを書く練習</li><li>質問音声を聞く</li></ul>
+                <h3>よくある課題</h3>
+                <ul><li>家で練習しない</li><li>アルファベットの認識が弱い</li><li>授業前の確認がない</li></ul>
+                <div class="callout">この時期は、「完璧な英語」よりも<strong>「英語をこわがらない気持ち」</strong>を育てることが一番大切です。</div>
+              </div>
+              <div class="lang-en" style="display:none">
+                <h3>Goals</h3>
+                <ul><li>Write first and last name</li><li>Write uppercase and lowercase ABC</li><li>Answer basic questions clearly</li></ul>
+                <h3>Home practice — under 5 minutes</h3>
+                <ul><li>Practice writing their name</li><li>Practice writing the alphabet</li><li>Listen to the question audio</li></ul>
+                <h3>Common issues</h3>
+                <ul><li>Does not practice at home</li><li>Weak ABC recognition</li><li>No preview before class</li></ul>
+                <div class="callout">At this age, the main goal is not perfect English, but <strong>feeling safe and curious around English sounds.</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grades 1–3 -->
+      <div class="acc-item hidden-level" id="acc-es1" data-color="es1" style="display:none">
+        <button class="acc-btn" type="button" aria-expanded="false">
+          <div class="acc-stripe"></div>
+          <div class="acc-label">
+            <div class="acc-tag" data-en="Grades 1–3" data-jp="小学1〜3年クラス">小学1〜3年クラス</div>
+            <div class="acc-title" data-en="Goals &amp; Homework" data-jp="目標と宿題">目標と宿題</div>
+            <div class="acc-sub" data-en="A golden time to build real English habits." data-jp="英語の「くせ」をつくる黄金期です。">英語の「くせ」をつくる黄金期です。</div>
+          </div>
+          <div class="acc-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <div class="panel-body">
+              <div class="lang-jp">
+                <h3>目標</h3>
+                <ul><li>週の単語を覚える</li><li>簡単な文を使う</li><li>質問に答える</li><li>話す自信をつける</li><li>短い日記を書く</li></ul>
+                <h3>宿題（5〜10分）</h3>
+                <ul><li>単語を書く（英語＋日本語）</li><li>学習デッキの音声を聞く</li><li>文カードを見直す</li><li>質問を声に出して練習する</li></ul>
+              </div>
+              <div class="lang-en" style="display:none">
+                <h3>Goals</h3>
+                <ul><li>Learn the weekly vocabulary</li><li>Use simple sentences in class</li><li>Answer weekly questions</li><li>Build confidence speaking</li><li>Write a short diary entry</li></ul>
+                <h3>Homework — 5 to 10 minutes</h3>
+                <ul><li>Write the weekly vocabulary (English + Japanese)</li><li>Listen to the Study Deck audio</li><li>Review the sentence cards</li><li>Practice the questions out loud</li></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grades 4–6 -->
+      <div class="acc-item hidden-level" id="acc-es2" data-color="es2" style="display:none">
+        <button class="acc-btn" type="button" aria-expanded="false">
+          <div class="acc-stripe"></div>
+          <div class="acc-label">
+            <div class="acc-tag" data-en="Grades 4–6" data-jp="小学4〜6年クラス">小学4〜6年クラス</div>
+            <div class="acc-title" data-en="Goals &amp; Homework" data-jp="目標と宿題">目標と宿題</div>
+            <div class="acc-sub" data-en="Building the base that leads into junior high English." data-jp="中学英語につながる本物の土台をつくる時期です。">中学英語につながる本物の土台をつくる時期です。</div>
+          </div>
+          <div class="acc-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <div class="panel-body">
+              <div class="lang-jp">
+                <h3>目標</h3>
+                <ul><li>単語を理解し使う</li><li>長い答えを作る</li><li>自信を持って答える</li><li>意見を言う</li><li>日記を継続する</li></ul>
+                <h3>宿題（10〜12分）</h3>
+                <ul><li>単語を書く（英語＋日本語）</li><li>文・質問デッキを確認する</li><li>声に出して練習する</li><li>英語日記（3〜4文）を書く</li></ul>
+              </div>
+              <div class="lang-en" style="display:none">
+                <h3>Goals</h3>
+                <ul><li>Understand and use weekly vocabulary</li><li>Build longer answers</li><li>Answer questions confidently</li><li>Express opinions</li><li>Maintain a diary</li></ul>
+                <h3>Homework — 10 to 12 minutes</h3>
+                <ul><li>Write the weekly vocabulary (English + Japanese)</li><li>Review sentence and question decks</li><li>Practice answers out loud</li><li>Keep a short diary (3–4 sentences)</li></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Junior High -->
+      <div class="acc-item hidden-level" id="acc-jhs" data-color="jhs" style="display:none">
+        <button class="acc-btn" type="button" aria-expanded="false">
+          <div class="acc-stripe"></div>
+          <div class="acc-label">
+            <div class="acc-tag" data-en="Junior High" data-jp="中学生クラス">中学生クラス</div>
+            <div class="acc-title" data-en="Goals &amp; Homework" data-jp="目標と宿題">目標と宿題</div>
+            <div class="acc-sub" data-en="Patterns and weekly speaking matter more than worksheets." data-jp="塾式よりも、話せるパターンと習慣が大事です。">塾式よりも、話せるパターンと習慣が大事です。</div>
+          </div>
+          <div class="acc-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <div class="panel-body">
+              <div class="lang-jp">
+                <h3>目標</h3>
+                <ul><li>よく使う文パターンを身につける</li><li>毎週のスピーキング習慣をつくる</li><li>英検３級〜準２級をめざす</li><li>学校英語を分かりやすくする</li></ul>
+                <h3>宿題（10〜15分）</h3>
+                <ul><li>単語を書く（英語＋日本語）</li><li>スタディデッキ（単語→文→質問）を復習する</li><li>声に出して答える練習をする</li><li>英語日記（4〜5文）を書く</li></ul>
+              </div>
+              <div class="lang-en" style="display:none">
+                <h3>Goals</h3>
+                <ul><li>Strong patterns they can actually use</li><li>Weekly speaking practice</li><li>Support school English</li><li>EIKEN 3 to Pre-2 as a normal target</li></ul>
+                <h3>Homework — 10 to 15 minutes</h3>
+                <ul><li>Write the weekly vocabulary (English + Japanese)</li><li>Review the Study Deck (vocab → sentences → questions)</li><li>Say the weekly answers out loud</li><li>Keep an English diary (4–5 sentences)</li></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- High School -->
+      <div class="acc-item hidden-level" id="acc-hs" data-color="hs" style="display:none">
+        <button class="acc-btn" type="button" aria-expanded="false">
+          <div class="acc-stripe"></div>
+          <div class="acc-label">
+            <div class="acc-tag" data-en="High School" data-jp="高校生クラス">高校生クラス</div>
+            <div class="acc-title" data-en="Goals &amp; Homework" data-jp="目標と宿題">目標と宿題</div>
+            <div class="acc-sub" data-en="Balancing EIKEN, conversation, and school English." data-jp="英検・会話力・学校英語の三本柱。">英検・会話力・学校英語の三本柱。</div>
+          </div>
+          <div class="acc-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <div class="panel-body">
+              <div class="lang-jp">
+                <h3>目標</h3>
+                <ul><li>意見や理由を英語で言えるようにする</li><li>長めの文をまとめて話せるようにする</li><li>英検準２級〜２級レベルをねらう</li><li>TOEIC 400〜650の土台をつくる</li></ul>
+                <h3>宿題（12〜20分）</h3>
+                <ul><li>単語を書く（英語＋日本語）</li><li>文・質問カードを声に出して読む</li><li>英語日記（5〜8文）を書く</li><li>ゲームデッキで復習する</li></ul>
+              </div>
+              <div class="lang-en" style="display:none">
+                <h3>Goals</h3>
+                <ul><li>Stronger speaking patterns and opinion phrases</li><li>Longer sentence control</li><li>EIKEN Pre-2 to 2 as the main target</li><li>TOEIC 400–650 foundations</li></ul>
+                <h3>Homework — 12 to 20 minutes</h3>
+                <ul><li>Write weekly vocabulary (English + Japanese)</li><li>Review sentences and questions out loud</li><li>Keep an English diary (5–8 sentences including opinions)</li><li>Use the Game Deck when possible</li></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Adults -->
+      <div class="acc-item hidden-level" id="acc-adult" data-color="adult" style="display:none">
+        <button class="acc-btn" type="button" aria-expanded="false">
+          <div class="acc-stripe"></div>
+          <div class="acc-label">
+            <div class="acc-tag" data-en="Adults" data-jp="大人クラス">大人クラス</div>
+            <div class="acc-title" data-en="Notes &amp; Good News" data-jp="課題とグッドニュース">課題とグッドニュース</div>
+            <div class="acc-sub" data-en="Moving away from scripts into real communication." data-jp="台本ではなく「伝え合う」英語へ。">台本ではなく「伝え合う」英語へ。</div>
+          </div>
+          <div class="acc-icon" aria-hidden="true">+</div>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <div class="panel-body">
+              <div class="lang-jp">
+                <h3>大人のよくある課題</h3>
+                <ul>
+                  <li>アウトプットが少ない。これが一番大きな問題です。準備なしで来て、質問されるのを待ってしまいます。</li>
+                  <li>日本語の考え方に頼りすぎる。英語に切り替える必要があります。</li>
+                  <li>曖昧な表現ばかり使う、または答えが出てこない。</li>
+                  <li>授業外で英語を使わない。</li>
+                </ul>
+                <h3>グッドニュース</h3>
+                <p>大人に特別な才能は必要ありません。必要なのは、毎週の継続、好奇心、そして英語を使う意欲です。この環境はそれを実現するためのものです。来るなら、話す準備をしてきてください。</p>
+              </div>
+              <div class="lang-en" style="display:none">
+                <h3>Common adult problems</h3>
+                <ul>
+                  <li>Not speaking or sharing enough output. Honestly, this is the biggest problem. They come unprepared and expect to be interviewed.</li>
+                  <li>Depending too much on Japanese logic. You need to code-switch.</li>
+                  <li>Using vague language — "so-so," "maamaa" — or having no answer to the weekly questions.</li>
+                  <li>Speaking too little outside class.</li>
+                </ul>
+                <h3>Good news</h3>
+                <p>Adults do not need talent. They need consistent weekly effort, curiosity, and a willingness to use English regularly. This is the best school for that. If you come, be prepared to talk.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- #acc-levels -->
+  </div><!-- .section-group -->
+
+  <div class="footer">
+    Bryan's English School &nbsp;·&nbsp; <span>Booha Adventure &amp; Boo-riculum</span>
   </div>
 
-  <div class="accordion">
+</div><!-- .wrap -->
 
-    <!-- 1. Booha Adventure -->
-    <section class="accordion-item level-adv">
-      <details open>
-        <summary class="ac-header">
-          <div class="ac-labels">
-            <span class="ac-mainlabel">
-              <span class="lang-ja">ブーハー・アドベンチャーとは？</span>
-              <span class="lang-en">What Is the Booha Adventure?</span>
-            </span>
-            <span class="ac-sublabel">
-              <span class="lang-ja">毎週のレッスンにつながる、インタラクティブな英語ワールドです。</span>
-              <span class="lang-en">Our interactive English world that connects every weekly lesson.</span>
-            </span>
-          </div>
-          <span class="ac-icon">▶</span>
-        </summary>
-        <div class="ac-body">
-          <div class="ac-inner">
-            <div class="lang-ja">
-              <p>
-                ブーハー・アドベンチャーは、生徒が「名前」と「PINコード」でログインし、週ごとの英語学習にアクセスできる世界です。
-                YouTube やゲームアプリのような「なんでもある世界」ではなく、
-                <strong>その週のレッスンに必要なものだけ</strong>が並んでいる、ゴールのあるマップです。
-              </p>
-              <p>
-                ブーハーの世界には、関係のない広告や動画は出てきません。
-                「今日はどれをやればいいの？」と迷わないように、<strong>今週のカード・ゲーム・チェックポイントだけ</strong>が光るように設計しています。
-                子どもが１人でさまよわない、親御さんが「このページを開けば大丈夫」と思える、安全で目的のはっきりした学習空間です。
-              </p>
-              <p>
-                地図には週ごとのチェックポイントがあり、新しい週が始まると光ります。タップすると、その週に使う２つのデッキが開きます。
-              </p>
-              <ul>
-                <li><strong>スタディデッキ</strong>（単語・文・スピーキング質問／すべて音声つき）</li>
-                <li><strong>ゲームデッキ</strong>（ブーハーオリジナルゲーム。発音認識つきのゲームもあります）</li>
-              </ul>
-              <p>
-                ゲームは「ごほうび」ではなく、<strong>学んだ英語を使ってクリアしていくステージ</strong>です。
-                ふだんの英語が、そのままゲームの中で使えるように設計しています。
-              </p>
-              <p>
-                すべてが<strong>「今週」</strong>にまとまっているので、「何をすればいいか」が一目で分かります。
-                親御さんは、チェックポイントを開くだけで「今週の学習」が確認できます。
-                生徒は「次の週までにどこまでやるか」、自分でペースを決めて動けるようになります。
-              </p>
-            </div>
+<script>
+(() => {
 
-            <div class="lang-en">
-              <p>
-                The Booha Adventure is our interactive map. Students log in with their name and PIN, and the Booha world opens.
-                It is not a random collection of apps — it is a clear path where
-                <strong>only the English for this week</strong> is shown.
-              </p>
-              <p>
-                There are no unrelated ads, suggested videos, or “next game” traps inside Booha.
-                Instead, the map shows just this week’s cards, games, and checkpoint.
-                Parents don’t have to worry about what their child will click next, and students don’t have to guess what to study —
-                the map itself quietly says, <strong>“Do this first.”</strong>
-              </p>
-              <p>
-                The map has weekly checkpoints. When a new week unlocks, the checkpoint glows. Tapping it opens the two decks for that week:
-              </p>
-              <ul>
-                <li><strong>Study Deck</strong> — vocabulary, sentences, and speaking questions (all with audio)</li>
-                <li><strong>Game Deck</strong> — Booha-only games, including speaking games that accept around 90% pronunciation</li>
-              </ul>
-              <p>
-                The games are not just “rewards.” They are
-                <strong>stages where students clear missions using the English they are learning</strong>.
-                The words and patterns from class appear inside the games.
-              </p>
-              <p>
-                Because everything is organized by week, students and parents can always see,
-                “This is what we’re doing now,” instead of guessing or searching through old materials.
-                Over time, kids start to feel, “I know what to do next,” and that sense of control is where real progress comes from.
-              </p>
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
+  /* ── Language ── */
+  let currentLang = 'jp';
 
-    <!-- 2. Boo-riculum -->
-    <section class="accordion-item level-ricu">
-      <details>
-        <summary class="ac-header">
-          <div class="ac-labels">
-            <span class="ac-mainlabel">
-              <span class="lang-ja">ブー・リキュラムとは？</span>
-              <span class="lang-en">What Is the Boo-riculum?</span>
-            </span>
-            <span class="ac-sublabel">
-              <span class="lang-ja">ブーハーの木から開く、A1〜B2レベル対応の年間学習プランです。</span>
-              <span class="lang-en">The yearly learning plan that powers the weekly decks (CEFR A1–B2).</span>
-            </span>
-          </div>
-          <span class="ac-icon">▶</span>
-        </summary>
-        <div class="ac-body">
-          <div class="ac-inner">
-            <div class="lang-ja">
-              <p>
-                ブーハー・アドベンチャー内の「木のマーク」をタップすると、ブー・リキュラム（年間学習プラン）が開きます。
-                ここで、「今年どんな英語を学ぶか」「どの順番で復習していくか」が決まっています。
-              </p>
-              <p>
-                １年は１２のテーマ（月）に分かれ、その中に４つの週（W1〜W4）が入っています。
-                どの月でも、<strong>①単語　②文と質問　③ゲーム　④日記</strong>という同じ流れで進むので、
-                生徒は「次に何をするか」をすぐに思い出せるようになります。
-                月が変わっても、ルールは変わりません。変わるのは「話す内容」と「使える表現のレベル」です。
-              </p>
-              <p>
-                年間の計画はありますが、画面に出るのは<strong>４週間分だけ</strong>です（2月第1週以降）。
-                毎週月曜日に新しい週が開き、前の週は「クリア済み」として残ります。計画は長くても、
-                見える画面はいつも「１ヶ月分」だけなので、子どもも大人も迷いません。
-              </p>
+  const btnEN     = document.getElementById('btnEN');
+  const btnJP     = document.getElementById('btnJP');
+  const pageTitle = document.getElementById('page-title');
+  const pageSub   = document.getElementById('page-sub');
+  const backLabel = document.getElementById('back-label');
+  const grp1Label = document.getElementById('grp1-label');
+  const grp2Label = document.getElementById('grp2-label');
 
-              <h3>CEFR（A1〜B2）について</h3>
-              <p>
-                CEFR（セファール）は、世界中で使われている「語学レベルのものさし」です。
-                ブー・リキュラムは、この<strong>A1〜B2</strong>の英語を、子どもにも大人にも分かりやすく、
-                少しずつステップアップできるようにデザインされています。
-              </p>
-              <ul>
-                <li><strong>A1〜A2：</strong>かんたんな単語・よく使う表現・日常会話・短い文</li>
-                <li><strong>B1〜B2：</strong>理由や意見・ストーリー・少し長めの文・読解につながる内容</li>
-              </ul>
-              <p>
-                毎週のデッキを使っていくことで、「気づいたら A1→A2→B1→B2 へ進んでいた」という形で、
-                テストのためだけではない本当のレベルアップを目指します。
-              </p>
+  const strings = {
+    titleEN: 'Booha Adventure<br>&amp; Boo-riculum',
+    titleJP: 'ブーハー・アドベンチャー<br>&amp; ブー・リキュラム',
+    subEN:   'A guide to how the Booha Adventure and Boo-riculum work, plus realistic goals and home practice ideas for each level.',
+    subJP:   'ブーハー・アドベンチャーとブー・リキュラムの使い方、クラスごとの目標と家庭学習のイメージをまとめたガイドです。',
+    backEN:  'Back to Main Site',
+    backJP:  '教室のメインページに戻る',
+    grp1EN:  'The System',
+    grp1JP:  'システム',
+    grp2EN:  'By Level',
+    grp2JP:  'レベル別',
+  };
 
-              <h3>日本の英語とのつながり</h3>
-              <p>
-                ブー・リキュラムは、英検５級〜２級、学校の教科書、TOEIC 400〜650 の土台になる英語をカバーしています。
-                「合否のテクニック」ではなく、そのテストの土台となる語彙・文型・読解・スピーキング力を育てるカリキュラムです。
-              </p>
-              <p>
-                そのため、テストを受けない生徒さんでも、「ニュース・映画・旅行・仕事」にそのまま使える英語力を積み上げることができます。
-              </p>
-            </div>
+  function setLang(lang) {
+    currentLang = lang;
+    const isJP = lang === 'jp';
+    btnEN.classList.toggle('active', !isJP);
+    btnJP.classList.toggle('active', isJP);
+    document.documentElement.lang = isJP ? 'ja' : 'en';
 
-            <div class="lang-en">
-              <p>
-                Inside the Booha Adventure, tapping the tree opens the Boo-riculum — the yearly learning plan behind all the weekly decks.
-                This is where we decide <strong>what English</strong> to cover across the year, and in what order.
-              </p>
-              <p>
-                The year is divided into twelve monthly themes, each with four weeks (W1–W4).
-                Every month follows the same rhythm:
-                <strong>① vocabulary  ② sentences &amp; questions  ③ game  ④ diary / short writing</strong>.
-                The topic changes (summer, school, stories, travel, etc.), but the pattern stays the same, so students always know what to do next.
-              </p>
-              <p>
-                The plan runs through the whole year, but only four weeks are visible at a time (from February Week 1).
-                Each Monday, a new week opens and older weeks become “cleared” checkpoints on the map.
-                Even though the curriculum is long, students always see just a small, clear piece of it.
-              </p>
+    pageTitle.innerHTML = isJP ? strings.titleJP : strings.titleEN;
+    pageTitle.className = 'page-title' + (isJP ? ' jp' : '');
+    pageSub.textContent = isJP ? strings.subJP : strings.subEN;
+    backLabel.textContent = isJP ? strings.backJP : strings.backEN;
+    grp1Label.textContent = isJP ? strings.grp1JP : strings.grp1EN;
+    grp2Label.textContent = isJP ? strings.grp2JP : strings.grp2EN;
 
-              <h3>What does CEFR A1–B2 mean?</h3>
-              <p>
-                CEFR is an international scale for language level. The Boo-riculum is designed to teach A1–B2 English in a simple,
-                progressive way — mostly through speaking, short reading-style tasks, and patterns that repeat in new topics.
-              </p>
-              <ul>
-                <li><strong>A1–A2</strong>: simple vocabulary, fixed patterns, everyday conversation, basic writing</li>
-                <li><strong>B1–B2</strong>: opinions, explanations, stories, longer sentences, and stronger grammar/vocabulary</li>
-              </ul>
-              <p>
-                The goal is not to “jump” levels with tricks. The goal is to move slowly from A1 → A2 → B1 → B2 through weekly use,
-                so students can actually use the language in real life, not just on a test.
-              </p>
+    /* Accordion header text */
+    document.querySelectorAll('[data-en][data-jp]').forEach(el => {
+      el.textContent = el.dataset[isJP ? 'jp' : 'en'];
+    });
 
-              <h3>Connection to Japanese English</h3>
-              <p>
-                The Boo-riculum directly supports:
-              </p>
-              <ul>
-                <li>EIKEN 5–2</li>
-                <li>Junior high &amp; high school textbook English</li>
-                <li>The language needed for TOEIC 400–650</li>
-              </ul>
-              <p>
-                Instead of teaching test tricks, it builds the real English those tests are written with.
-                That way, when students meet EIKEN or TOEIC questions, they’re seeing English they already know how to use in speaking and writing.
-              </p>
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
+    /* Panel body content */
+    document.querySelectorAll('.lang-jp, .lang-en').forEach(el => {
+      if (el.classList.contains('lang-jp')) el.style.display = isJP ? '' : 'none';
+      if (el.classList.contains('lang-en')) el.style.display = isJP ? 'none' : '';
+    });
 
-    <!-- 3. Required items -->
-    <section class="accordion-item level-items">
-      <details>
-        <summary class="ac-header">
-          <div class="ac-labels">
-            <span class="ac-mainlabel">
-              <span class="lang-ja">レッスンに必要なもの</span>
-              <span class="lang-en">What Students Need for Each Lesson</span>
-            </span>
-            <span class="ac-sublabel">
-              <span class="lang-ja">デバイス＋英語ノート（全生徒・必須です）</span>
-              <span class="lang-en">A device + English notebook (required for all students)</span>
-            </span>
-          </div>
-          <span class="ac-icon">▶</span>
-        </summary>
-        <div class="ac-body">
-          <div class="ac-inner">
-            <div class="lang-ja">
-              <p><strong>すべてのクラスで、毎回「デバイス１台」と「英語ノート」は必須です。</strong></p>
-              <p>
-                デバイスがないと、その日のブーハー・アドベンチャー／ブー・リキュラムの内容にアクセスできません。
-                レッスンはこのシステムを前提に進めているため、「今日はデバイスなしで大丈夫」ということは基本的にありません。
-              </p>
-              <p>
-                また、できるだけ授業中に「書き写す時間」を長く取りたくないため、
-                <strong>単語を書く作業は、できるだけ家のノートでしてきてください。</strong>
-              </p>
-              <ul>
-                <li>すべての学年：今週の単語を<strong>英語で書き、日本語を横にメモ</strong>する</li>
-                <li>ブーハーの音声を聞きながら、ノートで確認する</li>
-              </ul>
-              <p>
-                家で少しなじんでからレッスンに来ると、クラスでの内容がぐっと使いやすくなり、
-                <strong>「分からない」より「使える」が増えていきます。</strong>
-              </p>
-              <p>
-                ご家庭では、<strong>静かな３〜５分をつくってあげること</strong>が一番のサポートになります。
-                「全部やらせる」より、「少しだけでも毎週つづける」ことが大きな力になります。
-              </p>
-            </div>
+    /* Level tab labels */
+    document.querySelectorAll('.lang-jp-text').forEach(el => el.style.display = isJP ? '' : 'none');
+    document.querySelectorAll('.lang-en-text').forEach(el => el.style.display = isJP ? 'none' : '');
 
-            <div class="lang-en">
-              <p><strong>All students need a device and a notebook for every lesson. These are not optional.</strong></p>
-              <p>
-                The Booha Adventure and Boo-riculum live online. Without a device, students cannot access the weekly decks, games, or audio.
-                The lesson is built around this system, so “no device today” usually means “no access to the real lesson.”
-              </p>
-              <p>
-                We also try not to spend class time copying words. Instead, students should write the weekly vocabulary in their notebook at home — English word with the Japanese meaning next to it.
-              </p>
-              <ul>
-                <li>Write the weekly vocab at home (English + Japanese meaning)</li>
-                <li>Listen to the audio and check the words in the notebook</li>
-              </ul>
-              <p>
-                When students come to class already familiar with the week’s language, the lesson becomes much easier to use. Then class time can be spent speaking, listening, and thinking in English.
-              </p>
-              <p>
-                The best support at home is not “doing everything for them,” but <strong>creating a quiet 3–5 minute space</strong> where they can touch the English themselves each week.
-              </p>
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
+    /* Root class for JP font targeting */
+    document.getElementById('root').classList.toggle('jp', isJP);
+  }
 
-    <!-- 4. Results -->
-    <section class="accordion-item level-results">
-      <details>
-        <summary class="ac-header">
-          <div class="ac-labels">
-            <span class="ac-mainlabel">
-              <span class="lang-ja">英検・TOEICの目安</span>
-              <span class="lang-en">Realistic EIKEN &amp; TOEIC Results</span>
-            </span>
-            <span class="ac-sublabel">
-              <span class="lang-ja">週ごとの学習でめざせる、現実的な範囲です。</span>
-              <span class="lang-en">What students can realistically expect from steady Booha use.</span>
-            </span>
-          </div>
-          <span class="ac-icon">▶</span>
-        </summary>
-        <div class="ac-body">
-          <div class="ac-inner">
-            <div class="lang-ja">
-              <p>
-                ここに書いてあるのは、「毎週ブーハーを使い、話す・書く練習を続けた場合」の現実的な目安です。
-                「一気に高得点」ではなく、<strong>ゆっくりでも確実に伸びていくパターン</strong>だと考えてください。
-              </p>
+  btnEN.addEventListener('click', () => setLang('en'));
+  btnJP.addEventListener('click', () => setLang('jp'));
 
-              <h3>小学生</h3>
-              <ul>
-                <li>５級：かんたん</li>
-                <li>４級：無理なく合格</li>
-                <li>３級：小６で十分ねらえる</li>
-              </ul>
+  /* ── Accordion ── */
+  function closeAll(root) {
+    root.querySelectorAll('.acc-item').forEach(item => {
+      item.classList.remove('open');
+      item.querySelector('.acc-btn')?.setAttribute('aria-expanded', 'false');
+    });
+  }
 
-              <h3>中学生</h3>
-              <ul>
-                <li>３級〜準２級：標準的な目標</li>
-                <li>２級：よく話す生徒なら十分可能</li>
-              </ul>
+  function bindAccordion(root) {
+    root.querySelectorAll('.acc-item').forEach(item => {
+      item.querySelector('.acc-btn')?.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        closeAll(root);
+        if (!isOpen) {
+          item.classList.add('open');
+          item.querySelector('.acc-btn').setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  }
 
-              <h3>高校生</h3>
-              <ul>
-                <li>準２級〜２級：コンスタントに学べば十分ねらえる</li>
-                <li>準１級：しっかり話す・書く生徒なら可能</li>
-              </ul>
+  bindAccordion(document.getElementById('acc-system'));
+  bindAccordion(document.getElementById('acc-levels'));
 
-              <h3>TOEIC</h3>
-              <ul>
-                <li>中学生：300〜450（まじめに参加した場合）</li>
-                <li>高校生：400〜650（週ごとのデッキを続けた場合）</li>
-                <li>大人：15〜20分／日で450〜650が現実的。それ以上（700〜）は別途リーディングが必要</li>
-              </ul>
+  /* ── Level Tabs ── */
+  const levelIds = ['acc-pre', 'acc-es1', 'acc-es2', 'acc-jhs', 'acc-hs', 'acc-adult'];
+  const tabs = document.querySelectorAll('#level-tabs .level-tab');
 
-              <p>
-                ブー・リキュラムは、テストの「テクニック」ではなく、
-                テストの土台となる英語そのもの（語彙・文型・速さ・自動的な文法・読解パターン・意見表現）を育てます。
-                その結果として、英検やTOEICに強くなっていきます。
-              </p>
-            </div>
+  function showLevel(targetId) {
+    /* Hide all level items, close their panels */
+    levelIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.style.display = 'none';
+        el.classList.remove('open');
+        el.querySelector('.acc-btn')?.setAttribute('aria-expanded', 'false');
+      }
+    });
+    /* Show selected */
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.style.display = '';
+      /* Auto-open the shown item */
+      target.classList.add('open');
+      target.querySelector('.acc-btn')?.setAttribute('aria-expanded', 'true');
+    }
+    /* Update tab active state */
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.target === targetId));
+  }
 
-            <div class="lang-en">
-              <p>
-                These are realistic outcomes if a student uses the weekly decks, does the speaking, and plays the game deck regularly.
-                They are not promises, but they show what is normal when students actually use the system over months and years.
-              </p>
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => showLevel(tab.dataset.target));
+  });
 
-              <h3>EIKEN — Elementary</h3>
-              <ul>
-                <li>EIKEN 5 becomes easy</li>
-                <li>EIKEN 4 becomes comfortable</li>
-                <li>EIKEN 3 is realistic by Grade 6</li>
-              </ul>
+  /* Initial state */
+  showLevel('acc-pre');
+  setLang('jp');
 
-              <h3>EIKEN — Junior High</h3>
-              <ul>
-                <li>EIKEN 3 → Pre-2 becomes the normal range</li>
-                <li>EIKEN 2 is realistic for strong, consistent students</li>
-              </ul>
-
-              <h3>EIKEN — High School</h3>
-              <ul>
-                <li>EIKEN Pre-2 → 2 becomes the expected range</li>
-                <li>EIKEN Pre-1 is possible for motivated students</li>
-              </ul>
-
-              <h3>TOEIC</h3>
-              <ul>
-                <li>Junior High: TOEIC 300–450 with real participation</li>
-                <li>High School: TOEIC 400–650 for steady students</li>
-                <li>Adults: TOEIC 450–650 with 15–20 minutes a day; 700+ needs extra reading</li>
-              </ul>
-
-              <p>
-                These results appear because the Boo-riculum builds the essential skills behind tests:
-                A1–B2 vocabulary, sentence control, speaking speed and confidence, automatic grammar patterns, reading-style questions, and opinion phrases.
-                Tests are one checkpoint, not the only goal.
-              </p>
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
-
-    <!-- 5. Common problems -->
-    <section class="accordion-item level-problems">
-      <details>
-        <summary class="ac-header">
-          <div class="ac-labels">
-            <span class="ac-mainlabel">
-              <span class="lang-ja">よくあるつまずき</span>
-              <span class="lang-en">Common Problems (and What They Mean)</span>
-            </span>
-            <span class="ac-sublabel">
-              <span class="lang-ja">なぜ伸びないのか、本当の理由をやさしく説明します。</span>
-              <span class="lang-en">Why some students don’t progress, even when they keep coming to class.</span>
-            </span>
-          </div>
-          <span class="ac-icon">▶</span>
-        </summary>
-        <div class="ac-body">
-          <div class="ac-inner">
-            <div class="lang-ja">
-              <h3>1）準備してこない → 話すことがない</h3>
-              <p>
-                週のカードを見ていないと、そもそも「何を言えばよいか」が分かりません。
-                元気な子でも、まったく知らない内容だと固まってしまいます。
-              </p>
-
-              <h3>2）レッスン直前・車の中でまとめてやる</h3>
-              <p>
-                レッスン直前や車の中の練習は、「やった気」にはなりますが、頭に残りにくいタイミングです。
-                少しでも前の日に、落ち着いた時間で繰り返す方が効果があります。
-              </p>
-
-              <h3>3）家で練習しない → ずっと“ゼロ”のまま</h3>
-              <p>
-                家でまったく練習しない場合、その子のスタート地点は毎回同じになります。
-                授業では前回と同じ内容をやり直すことが多くなり、
-                本人も「できないまま」で自信をなくしやすくなります。
-              </p>
-              <p>
-                たとえ３〜５分でも、「前回の自分より一歩前」にいてくれると、１年後・２年後に大きな差になります。
-              </p>
-
-              <h3>4）日本語だけで説明を聞いてしまう</h3>
-              <p>
-                親御さんが日本語だけで内容を説明し、子どもが英語にほとんど触れないまま来てしまうと、
-                「分かったつもり」でも、実際には何も言えない状態になりがちです。
-                英語そのものに触れる時間を、少しずつ増やしていきましょう。
-              </p>
-            </div>
-
-            <div class="lang-en">
-              <h3>1. No preview → nothing to say.</h3>
-              <p>
-                If a child doesn’t look at the weekly cards, they simply don’t know what to talk about.
-                Even confident kids freeze when everything is new.
-              </p>
-
-              <h3>2. Last-minute practice doesn’t stick.</h3>
-              <p>
-                Practicing right before class or in the car feels productive, but it’s too rushed for the brain to save anything.
-                A calm 3 minutes the day before is far more powerful.
-              </p>
-
-              <h3>3. No home practice → always starting at zero.</h3>
-              <p>
-                If students never practice at home, their starting line is always the same.
-                We end up repeating old content and they feel “I can’t do it” instead of “I’m improving.”
-              </p>
-              <p>
-                The good news: even 3–5 minutes of weekly practice helps them remember faster, speak more,
-                feel proud, and move to new content instead of repeating the same lesson.
-              </p>
-
-              <h3>4. Only reading explanations in Japanese.</h3>
-              <p>
-                If parents only explain the content in Japanese and the child rarely touches the English itself,
-                they may “understand the idea” but still be unable to say anything.
-                Small, regular contact with the actual English is more important than perfect understanding in Japanese.
-              </p>
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
-
-    <!-- 6. Preschool -->
-    <section class="accordion-item level-preschool">
-      <details>
-        <summary class="ac-header">
-          <div class="ac-labels">
-            <span class="ac-mainlabel">
-              <span class="lang-ja">幼児クラス（未就学）</span>
-              <span class="lang-en">Preschool (Pre-Elementary)</span>
-            </span>
-            <span class="ac-sublabel">
-              <span class="lang-ja">書く力・聞く力・自信を育てる時期です。</span>
-              <span class="lang-en">A time to build writing, listening, and confidence.</span>
-            </span>
-          </div>
-          <span class="ac-icon">▶</span>
-        </summary>
-        <div class="ac-body">
-          <div class="ac-inner">
-            <div class="lang-ja">
-              <h3>目標</h3>
-              <ul>
-                <li>名前・名字を書く</li>
-                <li>ABC（大文字・小文字）を書く</li>
-                <li>したじき質問に元気に答える</li>
-              </ul>
-
-              <h3>家庭学習（5分以内）</h3>
-              <ul>
-                <li>名前を書く練習</li>
-                <li>ABCをなぞる</li>
-                <li>したじき質問の音声を聞く</li>
-              </ul>
-
-              <h3>よくある問題</h3>
-              <ul>
-                <li>恥ずかしくて声が小さくなる</li>
-                <li>ABCを覚えていない</li>
-                <li>予習なし → 何も言えない</li>
-              </ul>
-              <p>
-                この時期は、「完璧な英語」よりも
-                <strong>「英語をこわがらない気持ち」</strong>を育てることが一番大切です。
-              </p>
-            </div>
-
-            <div class="lang-en">
-              <h3>Goals</h3>
-              <ul>
-                <li>Write first and last name</li>
-                <li>Write uppercase and lowercase ABC</li>
-                <li>Answer the “shitajiki” questions confidently</li>
-              </ul>
-
-              <h3>Home practice (under 5 minutes)</h3>
-              <ul>
-                <li>Practice writing their name</li>
-                <li>Trace the alphabet</li>
-                <li>Listen to the question audio</li>
-              </ul>
-
-              <h3>Common issues</h3>
-              <ul>
-                <li>Too shy to speak loudly</li>
-                <li>Doesn’t remember ABC</li>
-                <li>No preview → nothing to say</li>
-              </ul>
-              <p>
-                At this age, the main goal is not perfect English, but
-                <strong>feeling safe and curious around English sounds.</strong>
-              </p>
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
-
-    <!-- 7. ES 1–3 -->
-    <section class="accordion-item level-es1">
-      <details>
-        <summary class="ac-header">
-          <div class="ac-labels">
-            <span class="ac-mainlabel">
-              <span class="lang-ja">小学1〜3年クラス</span>
-              <span class="lang-en">Grades 1–3 — Goals &amp; Homework</span>
-            </span>
-            <span class="ac-sublabel">
-              <span class="lang-ja">英語の「くせ」をつくる黄金期です。</span>
-              <span class="lang-en">A golden time to build real English habits.</span>
-            </span>
-          </div>
-          <span class="ac-icon">▶</span>
-        </summary>
-        <div class="ac-body">
-          <div class="ac-inner">
-            <div class="lang-ja">
-              <h3>目標</h3>
-              <ul>
-                <li>週の単語を理解する</li>
-                <li>かんたんな文で答える</li>
-                <li>スピーキングに自信をつける</li>
-                <li>英語ノートを使う習慣をつける</li>
-              </ul>
-
-              <h3>宿題（5〜10分）</h3>
-              <ul>
-                <li>単語を書く（英語→日本語）</li>
-                <li>スタディデッキの音声を聞く</li>
-                <li>文カードを読む</li>
-                <li>質問1〜2こを声に出して練習する</li>
-              </ul>
-
-              <h3>よくある問題</h3>
-              <ul>
-                <li>予習なし → 話せない</li>
-                <li>車内だけの練習 → 記憶に残りにくい</li>
-                <li>単語を書かない → 意味が覚えられない</li>
-              </ul>
-            </div>
-
-            <div class="lang-en">
-              <h3>Goals</h3>
-              <ul>
-                <li>Recognize and understand the weekly vocabulary</li>
-                <li>Use simple sentences in class</li>
-                <li>Answer the weekly speaking questions</li>
-                <li>Build confidence speaking to the teacher</li>
-                <li>Keep a small English notebook at home</li>
-              </ul>
-
-              <h3>Homework (5–10 minutes)</h3>
-              <ul>
-                <li>Write the weekly vocabulary (English + Japanese)</li>
-                <li>Listen to the Study Deck audio</li>
-                <li>Review the sentence cards</li>
-                <li>Practice answering 1–2 speaking questions out loud</li>
-              </ul>
-              <p>
-                If students write the vocabulary at home, we can use class time for speaking, not copying.
-              </p>
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
-
-    <!-- 8. ES 4–6 -->
-    <section class="accordion-item level-es2">
-      <details>
-        <summary class="ac-header">
-          <div class="ac-labels">
-            <span class="ac-mainlabel">
-              <span class="lang-ja">小学4〜6年クラス</span>
-              <span class="lang-en">Grades 4–6 — Goals &amp; Homework</span>
-            </span>
-            <span class="ac-sublabel">
-              <span class="lang-ja">中学英語につながる本物の土台をつくる時期です。</span>
-              <span class="lang-en">Building the base that leads into junior high English.</span>
-            </span>
-          </div>
-          <span class="ac-icon">▶</span>
-        </summary>
-        <div class="ac-body">
-          <div class="ac-inner">
-            <div class="lang-ja">
-              <h3>目標</h3>
-              <ul>
-                <li>単語の正確な理解</li>
-                <li>長めの文で答える</li>
-                <li>かんたんな意見を言う</li>
-                <li>英語ノートを継続する</li>
-              </ul>
-
-              <h3>宿題（10〜12分）</h3>
-              <ul>
-                <li>単語を書く（英語→日本語）</li>
-                <li>文・質問カードを復習する</li>
-                <li>声に出して答えを練習する</li>
-                <li>英語日記（3〜4文）を書く</li>
-              </ul>
-            </div>
-
-            <div class="lang-en">
-              <h3>Goals</h3>
-              <ul>
-                <li>Understand and use weekly vocabulary</li>
-                <li>Build longer, clearer sentences</li>
-                <li>Answer speaking questions confidently</li>
-                <li>Begin expressing simple opinions</li>
-                <li>Maintain a consistent English notebook</li>
-              </ul>
-
-              <h3>Homework (10–12 minutes)</h3>
-              <ul>
-                <li>Write the weekly vocabulary (English + Japanese)</li>
-                <li>Review the sentence and question decks</li>
-                <li>Practice saying the weekly answers out loud</li>
-                <li>Keep a short diary (3–4 simple sentences per week)</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
-
-    <!-- 9. JHS -->
-    <section class="accordion-item level-jhs">
-      <details>
-        <summary class="ac-header">
-          <div class="ac-labels">
-            <span class="ac-mainlabel">
-              <span class="lang-ja">中学生クラス</span>
-              <span class="lang-en">Junior High — Goals &amp; Homework</span>
-            </span>
-            <span class="ac-sublabel">
-              <span class="lang-ja">塾式よりも、話せるパターンと習慣が大事です。</span>
-              <span class="lang-en">Patterns and weekly speaking matter more than worksheets.</span>
-            </span>
-          </div>
-          <span class="ac-icon">▶</span>
-        </summary>
-        <div class="ac-body">
-          <div class="ac-inner">
-            <div class="lang-ja">
-              <h3>目標</h3>
-              <ul>
-                <li>よく使う文パターンを身につける</li>
-                <li>毎週のスピーキング習慣をつくる</li>
-                <li>英検３級〜準２級をめざす</li>
-                <li>学校英語を分かりやすくする</li>
-              </ul>
-
-              <h3>宿題（10〜15分）</h3>
-              <ul>
-                <li>単語を書く（英語→日本語）</li>
-                <li>スタディデッキ（単語→文→質問）を復習する</li>
-                <li>声に出して答える練習をする</li>
-                <li>英語日記（4〜5文）を書く</li>
-              </ul>
-            </div>
-
-            <div class="lang-en">
-              <h3>Goals</h3>
-              <ul>
-                <li>Strong patterns they can actually use</li>
-                <li>Weekly speaking practice</li>
-                <li>Clearer school English</li>
-                <li>EIKEN 3 → Pre-2 as a normal target</li>
-              </ul>
-
-              <h3>Homework (10–15 minutes)</h3>
-              <ul>
-                <li>Write the weekly vocabulary (English + Japanese)</li>
-                <li>Review the Study Deck (vocab → sentences → questions)</li>
-                <li>Say the weekly answers out loud</li>
-                <li>Keep a simple weekly English diary (4–5 sentences)</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
-
-    <!-- 10. HS -->
-    <section class="accordion-item level-hs">
-      <details>
-        <summary class="ac-header">
-          <div class="ac-labels">
-            <span class="ac-mainlabel">
-              <span class="lang-ja">高校生クラス</span>
-              <span class="lang-en">High School — Goals &amp; Homework</span>
-            </span>
-            <span class="ac-sublabel">
-              <span class="lang-ja">英検・会話力・学校英語の三本柱。</span>
-              <span class="lang-en">Balancing EIKEN, conversation, and school English.</span>
-            </span>
-          </div>
-          <span class="ac-icon">▶</span>
-        </summary>
-        <div class="ac-body">
-          <div class="ac-inner">
-            <div class="lang-ja">
-              <h3>目標</h3>
-              <ul>
-                <li>意見や理由を英語で言えるようにする</li>
-                <li>長めの文をまとめて話せるようにする</li>
-                <li>英検準２級〜２級レベルをねらう</li>
-                <li>TOEIC 400〜650の土台をつくる</li>
-              </ul>
-
-              <h3>宿題（12〜20分）</h3>
-              <ul>
-                <li>単語を書く（英語→日本語）</li>
-                <li>文・質問カードを声に出して読む</li>
-                <li>英語日記（5〜8文）を書く：意見もふくめて</li>
-                <li>ゲームデッキで復習する</li>
-              </ul>
-            </div>
-
-            <div class="lang-en">
-              <h3>Goals</h3>
-              <ul>
-                <li>Stronger speaking patterns and opinion phrases</li>
-                <li>Longer sentence control</li>
-                <li>EIKEN Pre-2 → 2 as the main target</li>
-                <li>TOEIC 400–650 foundations</li>
-              </ul>
-
-              <h3>Homework (12–20 minutes)</h3>
-              <ul>
-                <li>Write weekly vocabulary (English + Japanese)</li>
-                <li>Review sentences and questions</li>
-                <li>Say answers out loud (fluency over perfection)</li>
-                <li>Keep an English diary (5–8 sentences, including opinions)</li>
-                <li>Use the Game Deck when possible</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
-
-    <!-- 11. Adults -->
-    <section class="accordion-item level-adult">
-      <details>
-        <summary class="ac-header">
-          <div class="ac-labels">
-            <span class="ac-mainlabel">
-              <span class="lang-ja">大人クラス</span>
-              <span class="lang-en">Adults — Notes &amp; Good News</span>
-            </span>
-            <span class="ac-sublabel">
-              <span class="lang-ja">台本ではなく「伝え合う」英語へ。</span>
-              <span class="lang-en">Moving away from scripts into real communication.</span>
-            </span>
-          </div>
-          <span class="ac-icon">▶</span>
-        </summary>
-        <div class="ac-body">
-          <div class="ac-inner">
-            <div class="lang-ja">
-              <h3>よくあるつまずき</h3>
-              <ul>
-                <li>日本語の考え方のまま英語を話そうとする</li>
-                <li>完璧な台本を求めてしまう</li>
-                <li>一方的に話すだけになる</li>
-                <li>いつもあいまいな表現になる</li>
-                <li>英語圏の文化にほとんど興味を持たない</li>
-              </ul>
-
-              <h3>グッドニュース</h3>
-              <p>
-                大人には完璧な文法も特別な才能も必要ありません。必要なのは少しの週ごとの努力、短い日記、英語への好奇心、
-                そして「伝え合う姿勢」です。ブー・リキュラムをきちんと使う大人の生徒さんは、自分で驚くくらい自然に伸びていきます。
-              </p>
-            </div>
-
-            <div class="lang-en">
-              <h3>Common adult patterns</h3>
-              <ul>
-                <li>Trying to speak English with Japanese logic</li>
-                <li>Wanting “perfect lines” instead of conversations</li>
-                <li>Talking at the teacher instead of with the teacher</li>
-                <li>Using vague words for everything (“kind,” “good,” “easy”)</li>
-                <li>Learning English with almost no curiosity about English-speaking culture</li>
-              </ul>
-
-              <h3>Good news</h3>
-              <p>
-                Adults don’t need perfect grammar or talent. They need small weekly effort, a diary, curiosity, and a willingness to communicate, not perform.
-              </p>
-              <p>
-                Adults who follow the Boo-riculum and use it naturally almost always improve faster than they expected.
-              </p>
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
-
-  </div><!-- .accordion -->
-
-</div><!-- .page -->
-
+})();
+</script>
 </body>
-
 </html>
