@@ -98,6 +98,67 @@ body::after {
 .back-btn:hover { color: var(--ivory); border-color: rgba(255,255,255,.22); transform: translateX(-2px); }
 .back-btn svg { flex-shrink: 0; }
 
+/* ── HERO INTRO ── */
+.hero {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-top: 3px solid var(--adv);
+  border-radius: var(--r);
+  padding: 36px 32px;
+  margin-bottom: 36px;
+}
+.hero-en { display: none; }
+.hero-jp { display: block; }
+
+.hero p {
+  font-size: 15.5px;
+  line-height: 1.9;
+  color: #ccc9e8;
+  margin-bottom: 14px;
+}
+.hero p:last-child { margin-bottom: 0; }
+
+.hero .hero-lead {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: clamp(17px, 2.8vw, 22px);
+  font-weight: 600;
+  color: var(--ivory);
+  line-height: 1.55;
+  margin-bottom: 18px;
+}
+.jp .hero .hero-lead {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: clamp(15px, 2.5vw, 19px);
+  line-height: 1.7;
+}
+
+.hero .hero-punch {
+  font-size: 14px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  margin-top: 16px;
+  font-style: italic;
+}
+.jp .hero .hero-punch {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-style: normal;
+  font-size: 13.5px;
+}
+
+.hero .school-line {
+  font-weight: 700;
+  color: var(--adv);
+  font-size: 16px;
+  display: block;
+  margin: 10px 0 6px;
+}
+.jp .hero .school-line {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+}
+
+/* ── PAGE HEADER ── */
 .page-header {
   text-align: center; padding: 36px 20px 28px; position: relative;
 }
@@ -277,6 +338,7 @@ body::after {
   .acc-panel-inner { padding: 0 14px 18px; }
   .panel-body { padding: 16px; }
   .acc-title { font-size: 15px; }
+  .hero { padding: 24px 20px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
@@ -291,6 +353,29 @@ body::after {
       <span id="back-label">教室のメインページに戻る</span>
     </a>
   </nav>
+
+  <!-- ══ HERO INTRO ══ -->
+  <div class="hero" id="hero-block">
+
+    <div class="hero-jp lang-jp">
+      <p class="hero-lead">日本の学生は10年間英語を勉強しても、話せない。<br>それは生徒の問題ではなく、システムの問題です。</p>
+      <p>どの学校もインプット（読む・聞く・繰り返す）ばかりで、アウトプットがない。</p>
+      <span class="school-line">この学校は違います。</span>
+      <p>すべてのレッスンは「話すこと」を中心に設計されています。生徒は準備をして来て、話して、本物の英語を使います。専用アプリがレッスンと家庭をつなぎます。シンプルで、使いやすく、毎週迷わない。</p>
+      <p>英語を本気で話したいなら、ここが最適な場所です。</p>
+      <p class="hero-punch">自宅で少し準備する気持ちがないなら、正直に言います。どの学校も、あなたを変えることはできません。この学校も含めて。</p>
+    </div>
+
+    <div class="hero-en lang-en" style="display:none">
+      <p class="hero-lead">Japanese students study English for ten years and still can't speak it.<br>That's not a student problem. It's a system problem.</p>
+      <p>Every school focuses on input: reading, listening, repeating. Nobody focuses on output.</p>
+      <span class="school-line">This school does.</span>
+      <p>Every lesson is built around speaking. Students come prepared, they talk, they use real English. A custom app connects every lesson to home. Clear, engaging, no surprises.</p>
+      <p>If you're serious about speaking English, this is the right place.</p>
+      <p class="hero-punch">If you're not ready to prepare a little at home, honestly, no school can change that. Including this one.</p>
+    </div>
+
+  </div>
 
   <header class="page-header">
     <div class="eyebrow">Bryan's English School</div>
@@ -317,32 +402,32 @@ body::after {
           <div class="acc-label">
             <div class="acc-tag" data-en="01 — Adventure" data-jp="01 — アドベンチャー">01 — アドベンチャー</div>
             <div class="acc-title" data-en="What Is the Booha Adventure?" data-jp="ブーハー・アドベンチャーとは？">ブーハー・アドベンチャーとは？</div>
-            <div class="acc-sub" data-en="Our interactive English world, connected to every weekly lesson." data-jp="毎週のレッスンにつながる、インタラクティブな英語ワールドです。">毎週のレッスンにつながる、インタラクティブな英語ワールドです。</div>
+            <div class="acc-sub" data-en="Our weekly English system, connected to every lesson." data-jp="毎週のレッスンにつながる英語学習アプリです。">毎週のレッスンにつながる英語学習アプリです。</div>
           </div>
           <div class="acc-icon" aria-hidden="true">+</div>
         </button>
         <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
           <div class="lang-jp">
-            <p>Booha Adventureは、3つのカリキュラムを備えた週ごとの英語学習システムアプリです。生徒は名前とPINでログインし、その週に必要な英語にアクセスします。</p>
-            <p>これは一般的なアプリではありません。広告やおすすめ動画、無駄な機能は一切ありません。AIにも接続されていません。完全にプライベートで、ユーザーの行動を追跡することもなく、すべてのデータはあなたのデバイス内に保存されます。私でさえ、あなたの保存データを見ることはできません。</p>
-            <p>毎週、3つのチェックポイントが同時に開いています。Boohaゴーストは自動的に「今週」に移動しますが、「先週」と「来週」も利用できます。これは、迷路に入る前のスタディデッキと同じ考え方です。</p>
+            <p>ブーハー・アドベンチャーは、3つのカリキュラムを持つ週ごとの英語学習アプリです。生徒は名前とPINでログインし、その週に必要な英語にアクセスします。</p>
+            <p>広告も、おすすめ動画も、余計な機能も一切ありません。AIとも接続していません。完全にプライベートで、使い方を記録したりしません。すべてのデータはお使いのデバイス内に保存されます。私でさえ、保存データを見ることはできません。</p>
+            <p>毎週3つのチェックポイントが同時に開いています。ブーハーゴーストは自動的に「今週」に移動しますが、「先週」と「来週」も使えます。</p>
             <p>各週のチェックポイントでは、2つのデッキが開きます：</p>
             <ul>
-              <li><strong>スタディデッキ</strong> — 単語、文、スピーキング用の質問、そしてハンズフリーのリスニング＆リピート機能（すべて音声付き）</li>
+              <li><strong>スタディデッキ</strong> — 単語、文、スピーキング用の質問、ハンズフリーのリスニング&amp;リピート機能（すべて音声付き）</li>
               <li><strong>ゲームデッキ</strong> — その週の英語を使う練習ゲーム</li>
             </ul>
-            <p>ゲームはレッスンの一部です。クリアするためには、学習した英語を使う必要があります。</p>
+            <p>ゲームはレッスンの一部です。学習した英語を使わないとクリアできません。</p>
           </div>
           <div class="lang-en" style="display:none">
-            <p>The Booha Adventure is our weekly English system app, containing three full curricula. Students log in with their name and PIN and access the English they need for that week.</p>
-            <p>This is not a random app space. There are no ads, suggested videos, or distractions. It is not connected to AI. It is private, it does not track users, and all saves stay local on your device. Even I cannot see or read your saved data.</p>
-            <p>Three weekly checkpoints are available at the same time. The Booha ghost automatically travels to This Week, but Last Week and Next Week are also available. It works the same way as the study decks before entering the maze.</p>
+            <p>The Booha Adventure is a weekly English system app with three full curricula built in. Students log in with their name and PIN and access the English they need for that week.</p>
+            <p>No ads, no suggested videos, no distractions. Not connected to AI. It is private, does not track users, and all saves stay local on your device. Even I cannot see your saved data.</p>
+            <p>Three weekly checkpoints are open at the same time. The Booha ghost automatically travels to This Week, but Last Week and Next Week are also available.</p>
             <p>Each weekly checkpoint opens two decks:</p>
             <ul>
-              <li><strong>Study Deck</strong> — vocabulary, sentences, speaking questions, and a hands-free listen-and-repeat stream, all with full audio</li>
+              <li><strong>Study Deck</strong> — vocabulary, sentences, speaking questions, and a hands-free listen-and-repeat stream, all with audio</li>
               <li><strong>Game Deck</strong> — practice games that use the weekly English</li>
             </ul>
-            <p>The games are part of the lesson. Students are expected to use the English they studied in order to clear them.</p>
+            <p>The games are part of the lesson. Students need to use the English they studied to clear them.</p>
           </div>
         </div></div></div>
       </div>
@@ -354,36 +439,36 @@ body::after {
           <div class="acc-label">
             <div class="acc-tag" data-en="02 — Curricula" data-jp="02 — カリキュラム">02 — カリキュラム</div>
             <div class="acc-title" data-en="The Three Curricula" data-jp="3つのカリキュラム">3つのカリキュラム</div>
-            <div class="acc-sub" data-en="Pre-Boo, Boo-riculum, and Boo-Continuum — together they cover all levels of English." data-jp="Pre-Boo・Boo-riculum・Boo-Continuum — 3つ合わせてすべてのレベルに対応しています。">Pre-Boo・Boo-riculum・Boo-Continuum — 3つ合わせてすべてのレベルに対応しています。</div>
+            <div class="acc-sub" data-en="Pre-Boo, Boo-riculum, and Boo-Continuum — one for every level." data-jp="Pre-Boo・Boo-riculum・Boo-Continuum — すべてのレベルに対応。">Pre-Boo・Boo-riculum・Boo-Continuum — すべてのレベルに対応。</div>
           </div>
           <div class="acc-icon" aria-hidden="true">+</div>
         </button>
         <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
 
           <div class="lang-jp">
-            <p>ブーハー・アドベンチャーの中には、3つの年間カリキュラムがあります。自分に合ったものを選びます。それぞれが、年間を通してどの英語を使い、どのように積み上げていくかを決めています。</p>
+            <p>ブーハー・アドベンチャーの中に、3つの年間カリキュラムがあります。自分に合ったものを選び、1年間かけて英語を積み上げていきます。</p>
             <h3>Pre-Boo</h3>
-            <p>英語をこれから始める生徒や、基礎からやり直したい生徒のためのカリキュラムです。ただのアルファベット学習ではなく、「使うための基礎」を作ることを目的としています。シンプルな単語やパターンを使いながら、短くても自分で話す力を育てていきます。英語に慣れるだけでなく、「話すこと」に早い段階から入る設計です。英検5級・学校英語の基礎に対応しています。</p>
+            <p>英語をこれから始める生徒や、基礎からやり直したい生徒向けです。アルファベット学習ではなく、「使うための基礎」を作ります。最初から短い形でも話すことが求められます。英検5級・学校英語の基礎に対応しています。</p>
             <h3>Boo-riculum</h3>
-            <p>最も多くの生徒が使うメインのカリキュラムです。実際に使える会話英語を、ループ構造で何度も使いながら身につけていきます。レベルに縛られるのではなく、「どれだけ使ったか」で力が伸びる仕組みです。話す・答える・リアクションすることを中心に、自然に英語を使える状態を作ります。英検4級〜2級・中学高校英語・TOEICの土台に対応しています。</p>
+            <p>最も多くの生徒が使うメインのカリキュラムです。同じ英語を違う形で繰り返し使うことで、自然に会話力がつきます。レベルではなく、「どれだけ使ったか」で力が伸びます。英検4級〜2級・中学高校英語・TOEICの土台に対応しています。</p>
             <h3>Boo-Continuum</h3>
-            <p>Boo-riculumの先に進む生徒や、すでに英語力がある上級者のためのカリキュラムです。より長い発話、意見、理由付け、ニュアンスの違いなどを扱い、「自分の考えを英語で伝える力」を伸ばします。正確さだけでなく、自然さや説得力も重視します。英検準1級・1級・上級会話・TOEIC高得点に対応しています。</p>
+            <p>上級者向けです。長い発話、意見、理由付け、ニュアンスを扱い、「自分の考えを英語で伝える力」を伸ばします。英検準1級・1級・上級会話・TOEIC高得点に対応しています。</p>
             <h3>共通の仕組み</h3>
-            <p>どのカリキュラムも、1年は12のテーマに分かれ、各月は4週間で構成されています。毎週の流れは同じで、単語・文・質問・スピーキング・ゲーム・探検の順に進みます。スタート月は決まっていないため、どの週からでも始めることができます。内容は変わりますが、構造は変わりません。これにより、生徒は習慣と自信を身につけていきます。</p>
-            <div class="callout">これらのカリキュラムはテスト対策だけのものではありません。テストの土台となる<strong>「使える英語」</strong>を育てます。</div>
+            <p>どのカリキュラムも、1年12テーマ・各月4週間で構成されています。毎週の流れは同じ：単語・文・質問・スピーキング・ゲーム・探検。どの週からでも始められます。内容は変わりますが、流れは変わりません。これが習慣と自信をつくります。</p>
+            <div class="callout">テスト対策ではありません。<strong>テストの土台になる「使える英語」</strong>を育てます。</div>
           </div>
 
           <div class="lang-en" style="display:none">
-            <p>Inside the Booha Adventure there are three yearly curricula. You choose the one that fits you best. Each one defines what English you use across the year and how you build it.</p>
+            <p>Inside the Booha Adventure are three yearly curricula. You choose the one that fits. Each one defines what English you use across the year and how you build it.</p>
             <h3>Pre-Boo</h3>
-            <p>Pre-Boo is for students who are just starting or want to rebuild their foundation. This is not ABC learning. It is designed to build a foundation for using English. Students work with simple vocabulary and patterns, but from the beginning they are expected to speak, even in short forms. The goal is not just comfort, but early output. It supports Eiken Grade 5 and basic school English.</p>
+            <p>For students just starting or rebuilding their foundation. Not ABC learning. Students work with simple vocabulary and patterns, but from the beginning they are expected to speak. Supports Eiken Grade 5 and basic school English.</p>
             <h3>Boo-riculum</h3>
-            <p>Boo-riculum is the main curriculum and the one most students use. It builds practical conversational English through a looping structure, where students use the same ideas again and again in different ways. This is not level-based. Your level is based on how much you use the language. Students speak, answer, react, and build naturally. It supports Eiken Grade 4 to 2, junior and senior high school English, and the foundation of TOEIC.</p>
+            <p>The main curriculum. Students use the same ideas again and again in different ways until they stick. Not level-based. Your level is based on how much you use the language. Supports Eiken Grade 4 to 2, junior and senior high school English, and TOEIC foundations.</p>
             <h3>Boo-Continuum</h3>
-            <p>Boo-Continuum is for advanced students who want to go further. It focuses on longer speaking, opinions, reasoning, and nuance. Students learn how to express their own ideas clearly and naturally. It supports Eiken Pre-1 and Grade 1, advanced conversation, and higher TOEIC scores.</p>
+            <p>For advanced students. Longer speaking, opinions, reasoning, and nuance. Students learn to express their own ideas clearly and naturally. Supports Eiken Pre-1 and Grade 1, advanced conversation, and higher TOEIC scores.</p>
             <h3>How all three work</h3>
-            <p>All curricula follow the same structure. The year is divided into 12 themes, each with 4 weeks. Every week follows the same flow: vocabulary, sentences, questions, speaking, games, and exploration. There is no fixed starting point, so students can begin at any week. The content changes, but the structure stays the same, allowing students to build strong habits and real confidence over time.</p>
-            <div class="callout">These are not test-prep systems. They build the <strong>real English</strong> that tests are based on.</div>
+            <p>All curricula share the same structure: 12 themes per year, 4 weeks per month. Every week follows the same flow: vocabulary, sentences, questions, speaking, games, exploration. No fixed start point. The content changes, the structure stays the same. That consistency builds real habits.</p>
+            <div class="callout">These are not test-prep systems. They build the <strong>real English that tests are based on.</strong></div>
           </div>
 
         </div></div></div>
@@ -394,34 +479,34 @@ body::after {
         <button class="acc-btn" type="button" aria-expanded="false">
           <div class="acc-stripe"></div>
           <div class="acc-label">
-            <div class="acc-tag" data-en="03 — Requirements" data-jp="03 — 持ち物">03 — 持ち物</div>
-            <div class="acc-title" data-en="What Students Need for Each Lesson" data-jp="レッスンに必要なもの">レッスンに必要なもの</div>
-            <div class="acc-sub" data-en="A device + English notebook. Required for all students." data-jp="デバイス＋英語ノート（全生徒・必須）">デバイス＋英語ノート（全生徒・必須）</div>
+            <div class="acc-tag" data-en="03 — Requirements" data-jp="03 — 持ち物・準備">03 — 持ち物・準備</div>
+            <div class="acc-title" data-en="What to Bring. What to Do at Home." data-jp="家でやること。持ってくるもの。">家でやること。持ってくるもの。</div>
+            <div class="acc-sub" data-en="Class time is for speaking, not writing." data-jp="授業中は書かない。書くのは家で。">授業中は書かない。書くのは家で。</div>
           </div>
           <div class="acc-icon" aria-hidden="true">+</div>
         </button>
         <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
           <div class="lang-jp">
-            <p><strong>すべての生徒はデバイスを持参し、自宅で単語を書き、ノートをクラスに持ってきて確認を受ける必要があります。すべての週の内容を書くのが理想です。</strong></p>
-            <p>デバイスがない場合、週ごとのデッキ、音声、ゲームにアクセスできません。レッスンはこのシステムを中心に構成されています。授業中に単語を書き写すことはしません。単語は英語と日本語の意味をセットで自宅で書いてきてください。</p>
+            <p><strong>この学校は家での準備が前提です。授業中に単語を書き写す時間はありません。</strong></p>
+            <p>デバイスがなければ、週ごとのデッキ・音声・ゲームにアクセスできません。単語は英語と日本語をセットで、家で書いてきてください。</p>
             <ul>
               <li>デバイスを持参する</li>
               <li>宿題ノートを持参する</li>
-              <li>最低でも週の単語を書く</li>
+              <li>週の単語を家で書いてくる（英語＋日本語）</li>
               <li>授業前に音声を確認する</li>
             </ul>
-            <p>準備してきた生徒は、授業中に話す・聞く・使うことに集中できます。準備していない生徒は苦労することが多いです。</p>
+            <p>準備してきた生徒は、授業中に話す・聞く・使うことに集中できます。準備していない生徒は苦労します。</p>
           </div>
           <div class="lang-en" style="display:none">
-            <p><strong>All students must bring a device and complete vocabulary writing at home in a notebook they bring to class for me to check. Writing all of the weekly content is even better.</strong></p>
-            <p>Without a device, students cannot access the weekly decks, audio, or games. The lesson is built around this system. We do not spend class time copying vocabulary. Students are expected to write the weekly vocabulary at home in English with the Japanese meaning.</p>
+            <p><strong>This school requires preparation at home. Class time is for speaking, not writing.</strong></p>
+            <p>Without a device, students cannot access the weekly decks, audio, or games. Vocabulary must be written at home in English with the Japanese meaning.</p>
             <ul>
               <li>Bring a device</li>
               <li>Bring your homework notebook</li>
-              <li>Write at least the weekly vocabulary at home</li>
-              <li>Review the audio before class</li>
+              <li>Write the weekly vocabulary at home before class</li>
+              <li>Review the audio before arriving</li>
             </ul>
-            <p>Prepared students can use class time for speaking, listening, and using English. Unprepared students usually struggle.</p>
+            <p>Prepared students use class time for speaking, listening, and using English. Unprepared students struggle.</p>
           </div>
         </div></div></div>
       </div>
@@ -432,19 +517,19 @@ body::after {
           <div class="acc-stripe"></div>
           <div class="acc-label">
             <div class="acc-tag" data-en="04 — Results" data-jp="04 — 成果の目安">04 — 成果の目安</div>
-            <div class="acc-title" data-en="Realistic EIKEN &amp; TOEIC Results" data-jp="英検・TOEICの目安">英検・TOEICの目安</div>
-            <div class="acc-sub" data-en="What students can realistically expect from steady Booha use." data-jp="週ごとの学習でめざせる、現実的な範囲です。">週ごとの学習でめざせる、現実的な範囲です。</div>
+            <div class="acc-title" data-en="Realistic EIKEN and TOEIC Results" data-jp="英検・TOEICの目安">英検・TOEICの目安</div>
+            <div class="acc-sub" data-en="What steady weekly effort actually produces." data-jp="週ごとの積み上げで、現実的にめざせる範囲です。">週ごとの積み上げで、現実的にめざせる範囲です。</div>
           </div>
           <div class="acc-icon" aria-hidden="true">+</div>
         </button>
         <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
           <div class="lang-jp">
-            <p>以下は、週ごとのデッキを使い、自宅で準備を行い、授業にしっかり参加した生徒の現実的な成果です。保証ではありません。</p>
+            <p>週ごとのデッキを使い、家で準備し、授業にしっかり参加した生徒の現実的な成果です。保証ではありません。</p>
             <h3>英検</h3>
             <table class="r-table">
               <tr><th>レベル</th><th>目標</th></tr>
               <tr><td>小学生</td><td>5級は簡単に。4級は現実的。3級は6年生で可能</td></tr>
-              <tr><td>中学生</td><td>3級〜準2級が標準的な範囲。2級も可能（しっかり取り組む場合）</td></tr>
+              <tr><td>中学生</td><td>3級〜準2級が標準。2級も可能（しっかり取り組む場合）</td></tr>
               <tr><td>高校生</td><td>準2級〜2級が現実的。準1級も可能（真剣に取り組む場合）</td></tr>
             </table>
             <h3>TOEIC</h3>
@@ -452,12 +537,12 @@ body::after {
               <tr><th>レベル</th><th>スコアの目安</th></tr>
               <tr><td>中学生</td><td>300〜450</td></tr>
               <tr><td>高校生</td><td>400〜650</td></tr>
-              <tr><td>大人</td><td>450〜650（継続的な学習が前提）</td></tr>
+              <tr><td>大人</td><td>450〜650（週ごとの継続が前提）</td></tr>
             </table>
-            <div class="callout">これらの成果は、継続的な取り組みによるものです。テクニックではなく、毎週の積み上げです。</div>
+            <div class="callout">結果は<strong>続けることで出ます。</strong>テクニックではなく、毎週の積み上げです。</div>
           </div>
           <div class="lang-en" style="display:none">
-            <p>These are realistic results for students who use the weekly decks, prepare at home, and participate properly in class. They are not guarantees.</p>
+            <p>Realistic results for students who use the weekly decks, prepare at home, and participate fully in class. Not guarantees.</p>
             <h3>EIKEN</h3>
             <table class="r-table">
               <tr><th>Level</th><th>Realistic target</th></tr>
@@ -472,7 +557,7 @@ body::after {
               <tr><td>High School</td><td>400–650</td></tr>
               <tr><td>Adults</td><td>450–650 with steady weekly study</td></tr>
             </table>
-            <div class="callout">These results come from <strong>consistent use</strong>, not tricks or shortcuts.</div>
+            <div class="callout">Results come from <strong>consistent weekly effort,</strong> not shortcuts.</div>
           </div>
         </div></div></div>
       </div>
@@ -483,8 +568,8 @@ body::after {
           <div class="acc-stripe"></div>
           <div class="acc-label">
             <div class="acc-tag" data-en="05 — Problems" data-jp="05 — よくあるつまずき">05 — よくあるつまずき</div>
-            <div class="acc-title" data-en="Common Problems (and What They Mean)" data-jp="よくあるつまずき">よくあるつまずき</div>
-            <div class="acc-sub" data-en="Why some students don't progress, even when they keep coming to class." data-jp="なぜ伸びないのか、本当の理由をやさしく説明します。">なぜ伸びないのか、本当の理由をやさしく説明します。</div>
+            <div class="acc-title" data-en="Why Students Stop Improving" data-jp="正直に言います。なぜ伸びないのか。">正直に言います。なぜ伸びないのか。</div>
+            <div class="acc-sub" data-en="Honest reasons, because you deserve to know." data-jp="伸びない理由には、パターンがあります。">伸びない理由には、パターンがあります。</div>
           </div>
           <div class="acc-icon" aria-hidden="true">+</div>
         </button>
@@ -492,62 +577,72 @@ body::after {
           <div class="lang-jp">
             <div class="problem-block">
               <div class="pb-num">01</div>
-              <div class="pb-title">準備なし → 話すことがない</div>
-              <p>週の英語を事前に確認していない生徒は、授業中に話すことがほとんどなく、退屈になりやすいです。ここはアウトプット中心のスクールなので、年齢に関係なく話すことが求められます。準備していないときだけストレスになります。</p>
+              <div class="pb-title">準備なし。話すことがない。</div>
+              <p>週の英語を事前に確認していない生徒は、授業中に話すことがなく、退屈になります。ここはアウトプット中心のスクールです。年齢に関係なく、話すことが求められます。準備していない時だけ、それがつらくなります。</p>
             </div>
             <div class="problem-block">
               <div class="pb-num">02</div>
               <div class="pb-title">直前の確認だけ</div>
-              <p>授業直前や移動中の確認は何もしないよりは良いですが、大きな成長にはつながりません。</p>
+              <p>車の中や授業直前の確認は、何もしないよりずっといい。でも、大きな成長にはつながりません。始めることが大事です。</p>
             </div>
             <div class="problem-block">
               <div class="pb-num">03</div>
-              <div class="pb-title">家での練習なし → ずっと"ゼロ"のまま</div>
-              <p>自宅で学習しない生徒は、毎週同じところでつまずきます。</p>
+              <div class="pb-title">家での練習なし</div>
+              <p>家で英語に触れない生徒は、毎週同じところでつまずきます。</p>
             </div>
             <div class="problem-block">
               <div class="pb-num">04</div>
               <div class="pb-title">日本語に頼りすぎる</div>
-              <p>日本語だけで理解し、英語に触れない場合、アウトプット力は育ちません。</p>
+              <p>日本語でだけ理解して、英語に触れない場合、話す力はつきません。</p>
+            </div>
+            <div class="problem-block">
+              <div class="pb-num">05</div>
+              <div class="pb-title">幼い子どもの場合、家での準備は保護者次第</div>
+              <p>小学校低学年以下の生徒は、一人で家庭学習を管理できません。保護者が関わっていなければ、子どもも準備できません。この学校では、幼い生徒の保護者も一緒に参加していただきます。</p>
             </div>
           </div>
           <div class="lang-en" style="display:none">
             <div class="problem-block">
               <div class="pb-num">01</div>
-              <div class="pb-title">No preparation</div>
-              <p>Students who do not preview the weekly English usually have very little to say in class and often become bored. This is an output school, so students of all ages are expected to talk. It is only stressful when they are unprepared.</p>
+              <div class="pb-title">No preparation. Nothing to say.</div>
+              <p>Students who don't preview the weekly English have very little to say in class and often become disengaged. This is an output school. Students of all ages are expected to talk. It is only hard when they are unprepared.</p>
             </div>
             <div class="problem-block">
               <div class="pb-num">02</div>
-              <div class="pb-title">Last-minute review</div>
-              <p>Reviewing in the car or right before class is better than nothing, but it is not enough for strong progress.</p>
+              <div class="pb-title">Last-minute review only</div>
+              <p>Reviewing in the car or right before class is much better than nothing. But it won't produce strong growth. Starting is what matters.</p>
             </div>
             <div class="problem-block">
               <div class="pb-num">03</div>
               <div class="pb-title">No home practice</div>
-              <p>Students who do not study at home tend to repeat the same struggle every week.</p>
+              <p>Students who don't study at home repeat the same struggle every week.</p>
             </div>
             <div class="problem-block">
               <div class="pb-num">04</div>
               <div class="pb-title">Too much Japanese support</div>
-              <p>If students only understand the content in Japanese and rarely touch the English itself, they do not build output.</p>
+              <p>If students only understand the content in Japanese and rarely touch the English itself, they won't build output.</p>
+            </div>
+            <div class="problem-block">
+              <div class="pb-num">05</div>
+              <div class="pb-title">For young students, home preparation depends on the parent</div>
+              <p>Children in lower elementary school and below cannot manage home preparation on their own. If the parent isn't involved, the child can't prepare. At this school, parents of young learners are expected to be part of the process.</p>
             </div>
           </div>
         </div></div></div>
       </div>
 
-    </div><!-- #acc-system -->
-  </div><!-- .section-group -->
+    </div>
+  </div>
 
   <!-- ══ GROUP 2: By Level ══ -->
   <div class="section-group">
     <div class="group-label"><span id="grp2-label">レベル別</span></div>
 
     <div class="level-tabs" id="level-tabs" role="tablist">
-      <button class="level-tab active" data-target="acc-pre" role="tab">
+      <button class="level-tab" data-target="acc-pre" role="tab">
         <span class="lang-jp-text">幼児</span><span class="lang-en-text" style="display:none">Preschool</span>
       </button>
-      <button class="level-tab" data-target="acc-es1" role="tab">
+      <button class="level-tab active" data-target="acc-es1" role="tab">
         <span class="lang-jp-text">小1〜3</span><span class="lang-en-text" style="display:none">Gr. 1–3</span>
       </button>
       <button class="level-tab" data-target="acc-es2" role="tab">
@@ -567,13 +662,13 @@ body::after {
     <div class="acc-list" id="acc-levels">
 
       <!-- Preschool -->
-      <div class="acc-item" id="acc-pre" data-color="pre">
+      <div class="acc-item" id="acc-pre" data-color="pre" style="display:none">
         <button class="acc-btn" type="button" aria-expanded="false">
           <div class="acc-stripe"></div>
           <div class="acc-label">
             <div class="acc-tag" data-en="Preschool" data-jp="幼児クラス（未就学）">幼児クラス（未就学）</div>
-            <div class="acc-title" data-en="Goals &amp; Home Practice" data-jp="目標と家庭学習">目標と家庭学習</div>
-            <div class="acc-sub" data-en="Writing, listening, and building confidence." data-jp="書く力・聞く力・自信を育てる時期です。">書く力・聞く力・自信を育てる時期です。</div>
+            <div class="acc-title" data-en="Goals and Home Practice" data-jp="目標と家庭学習">目標と家庭学習</div>
+            <div class="acc-sub" data-en="Building curiosity before building ability." data-jp="能力より先に、英語を好きになる時期。">能力より先に、英語を好きになる時期。</div>
           </div>
           <div class="acc-icon" aria-hidden="true">+</div>
         </button>
@@ -585,7 +680,7 @@ body::after {
             <ul><li>名前を書く練習</li><li>アルファベットを書く練習</li><li>質問音声を聞く</li></ul>
             <h3>よくある課題</h3>
             <ul><li>家で練習しない</li><li>アルファベットの認識が弱い</li><li>授業前の確認がない</li></ul>
-            <div class="callout">この時期は、「完璧な英語」よりも<strong>「英語をこわがらない気持ち」</strong>を育てることが一番大切です。</div>
+            <div class="callout">この時期に大切なのは「完璧な英語」ではありません。<strong>英語をこわがらない気持ち</strong>を育てることです。</div>
           </div>
           <div class="lang-en" style="display:none">
             <h3>Goals</h3>
@@ -593,20 +688,20 @@ body::after {
             <h3>Home practice — under 5 minutes</h3>
             <ul><li>Practice writing their name</li><li>Practice writing the alphabet</li><li>Listen to the question audio</li></ul>
             <h3>Common issues</h3>
-            <ul><li>Does not practice at home</li><li>Weak ABC recognition</li><li>No preview before class</li></ul>
-            <div class="callout">At this age, the main goal is not perfect English, but <strong>feeling safe and curious around English sounds.</strong></div>
+            <ul><li>No practice at home</li><li>Weak ABC recognition</li><li>No preview before class</li></ul>
+            <div class="callout">At this age, the goal is not perfect English. It is <strong>feeling safe and curious around English sounds.</strong></div>
           </div>
         </div></div></div>
       </div>
 
       <!-- Grades 1–3 -->
-      <div class="acc-item" id="acc-es1" data-color="es1" style="display:none">
+      <div class="acc-item" id="acc-es1" data-color="es1">
         <button class="acc-btn" type="button" aria-expanded="false">
           <div class="acc-stripe"></div>
           <div class="acc-label">
             <div class="acc-tag" data-en="Grades 1–3" data-jp="小学1〜3年クラス">小学1〜3年クラス</div>
-            <div class="acc-title" data-en="Goals &amp; Homework" data-jp="目標と宿題">目標と宿題</div>
-            <div class="acc-sub" data-en="A golden time to build real English habits." data-jp="英語の「くせ」をつくる黄金期です。">英語の「くせ」をつくる黄金期です。</div>
+            <div class="acc-title" data-en="Goals and Homework" data-jp="目標と宿題">目標と宿題</div>
+            <div class="acc-sub" data-en="The best age to build real English habits." data-jp="英語の習慣をつくる黄金期です。">英語の習慣をつくる黄金期です。</div>
           </div>
           <div class="acc-icon" aria-hidden="true">+</div>
         </button>
@@ -615,7 +710,7 @@ body::after {
             <h3>目標</h3>
             <ul><li>週の単語を覚える</li><li>簡単な文を使う</li><li>質問に答える</li><li>話す自信をつける</li><li>短い日記を書く</li></ul>
             <h3>宿題（5〜10分）</h3>
-            <ul><li>単語を書く（英語＋日本語）</li><li>学習デッキの音声を聞く</li><li>文カードを見直す</li><li>質問を声に出して練習する</li></ul>
+            <ul><li>単語を書く（英語＋日本語）</li><li>スタディデッキの音声を聞く</li><li>文カードを見直す</li><li>質問を声に出して練習する</li></ul>
           </div>
           <div class="lang-en" style="display:none">
             <h3>Goals</h3>
@@ -632,8 +727,8 @@ body::after {
           <div class="acc-stripe"></div>
           <div class="acc-label">
             <div class="acc-tag" data-en="Grades 4–6" data-jp="小学4〜6年クラス">小学4〜6年クラス</div>
-            <div class="acc-title" data-en="Goals &amp; Homework" data-jp="目標と宿題">目標と宿題</div>
-            <div class="acc-sub" data-en="Building the base that leads into junior high English." data-jp="中学英語につながる本物の土台をつくる時期です。">中学英語につながる本物の土台をつくる時期です。</div>
+            <div class="acc-title" data-en="Goals and Homework" data-jp="目標と宿題">目標と宿題</div>
+            <div class="acc-sub" data-en="Building the base that leads into junior high English." data-jp="中学英語につながる土台をつくる時期です。">中学英語につながる土台をつくる時期です。</div>
           </div>
           <div class="acc-icon" aria-hidden="true">+</div>
         </button>
@@ -648,7 +743,7 @@ body::after {
             <h3>Goals</h3>
             <ul><li>Understand and use weekly vocabulary</li><li>Build longer answers</li><li>Answer questions confidently</li><li>Express opinions</li><li>Maintain a diary</li></ul>
             <h3>Homework — 10 to 12 minutes</h3>
-            <ul><li>Write the weekly vocabulary (English + Japanese)</li><li>Review sentence and question decks</li><li>Practice answers out loud</li><li>Keep a short diary (3–4 sentences)</li></ul>
+            <ul><li>Write the weekly vocabulary (English + Japanese)</li><li>Review sentence and question decks</li><li>Practice answers out loud</li><li>Keep a short diary (3 to 4 sentences)</li></ul>
           </div>
         </div></div></div>
       </div>
@@ -659,23 +754,23 @@ body::after {
           <div class="acc-stripe"></div>
           <div class="acc-label">
             <div class="acc-tag" data-en="Junior High" data-jp="中学生クラス">中学生クラス</div>
-            <div class="acc-title" data-en="Goals &amp; Homework" data-jp="目標と宿題">目標と宿題</div>
-            <div class="acc-sub" data-en="Patterns and weekly speaking matter more than worksheets." data-jp="塾式よりも、話せるパターンと習慣が大事です。">塾式よりも、話せるパターンと習慣が大事です。</div>
+            <div class="acc-title" data-en="Goals and Homework" data-jp="目標と宿題">目標と宿題</div>
+            <div class="acc-sub" data-en="Speaking habits matter more than worksheets." data-jp="プリントより、話せるパターンと習慣が大事です。">プリントより、話せるパターンと習慣が大事です。</div>
           </div>
           <div class="acc-icon" aria-hidden="true">+</div>
         </button>
         <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
           <div class="lang-jp">
             <h3>目標</h3>
-            <ul><li>よく使う文パターンを身につける</li><li>毎週のスピーキング習慣をつくる</li><li>英検３級〜準２級をめざす</li><li>学校英語を分かりやすくする</li></ul>
+            <ul><li>よく使う文パターンを身につける</li><li>毎週のスピーキング習慣をつくる</li><li>学校英語の理解を深める</li><li>英検3級〜準2級をめざす</li></ul>
             <h3>宿題（10〜15分）</h3>
             <ul><li>単語を書く（英語＋日本語）</li><li>スタディデッキ（単語→文→質問）を復習する</li><li>声に出して答える練習をする</li><li>英語日記（4〜5文）を書く</li></ul>
           </div>
           <div class="lang-en" style="display:none">
             <h3>Goals</h3>
-            <ul><li>Strong patterns they can actually use</li><li>Weekly speaking practice</li><li>Support school English</li><li>EIKEN 3 to Pre-2 as a normal target</li></ul>
+            <ul><li>Build strong patterns they can actually use</li><li>Develop a weekly speaking habit</li><li>Support school English</li><li>EIKEN 3 to Pre-2 as a normal target</li></ul>
             <h3>Homework — 10 to 15 minutes</h3>
-            <ul><li>Write the weekly vocabulary (English + Japanese)</li><li>Review the Study Deck (vocab → sentences → questions)</li><li>Say the weekly answers out loud</li><li>Keep an English diary (4–5 sentences)</li></ul>
+            <ul><li>Write the weekly vocabulary (English + Japanese)</li><li>Review the Study Deck (vocabulary, sentences, questions)</li><li>Say the weekly answers out loud</li><li>Keep an English diary (4 to 5 sentences)</li></ul>
           </div>
         </div></div></div>
       </div>
@@ -686,23 +781,23 @@ body::after {
           <div class="acc-stripe"></div>
           <div class="acc-label">
             <div class="acc-tag" data-en="High School" data-jp="高校生クラス">高校生クラス</div>
-            <div class="acc-title" data-en="Goals &amp; Homework" data-jp="目標と宿題">目標と宿題</div>
-            <div class="acc-sub" data-en="Balancing EIKEN, conversation, and school English." data-jp="英検・会話力・学校英語の三本柱。">英検・会話力・学校英語の三本柱。</div>
+            <div class="acc-title" data-en="Goals and Homework" data-jp="目標と宿題">目標と宿題</div>
+            <div class="acc-sub" data-en="EIKEN, conversation, and school English together." data-jp="英検・会話力・学校英語の三本柱。">英検・会話力・学校英語の三本柱。</div>
           </div>
           <div class="acc-icon" aria-hidden="true">+</div>
         </button>
         <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
           <div class="lang-jp">
             <h3>目標</h3>
-            <ul><li>意見や理由を英語で言えるようにする</li><li>長めの文をまとめて話せるようにする</li><li>英検準２級〜２級レベルをねらう</li><li>TOEIC 400〜650の土台をつくる</li></ul>
+            <ul><li>意見や理由を英語で言えるようにする</li><li>長めの文をまとめて話せるようにする</li><li>英検準2級〜2級レベルをねらう</li><li>TOEIC 400〜650の土台をつくる</li></ul>
             <h3>宿題（12〜20分）</h3>
             <ul><li>単語を書く（英語＋日本語）</li><li>文・質問カードを声に出して読む</li><li>英語日記（5〜8文）を書く</li><li>ゲームデッキで復習する</li></ul>
           </div>
           <div class="lang-en" style="display:none">
             <h3>Goals</h3>
-            <ul><li>Stronger speaking patterns and opinion phrases</li><li>Longer sentence control</li><li>EIKEN Pre-2 to 2 as the main target</li><li>TOEIC 400–650 foundations</li></ul>
+            <ul><li>Build stronger speaking patterns and opinion phrases</li><li>Develop longer sentence control</li><li>EIKEN Pre-2 to 2 as the main target</li><li>TOEIC 400 to 650 foundations</li></ul>
             <h3>Homework — 12 to 20 minutes</h3>
-            <ul><li>Write weekly vocabulary (English + Japanese)</li><li>Review sentences and questions out loud</li><li>Keep an English diary (5–8 sentences including opinions)</li><li>Use the Game Deck when possible</li></ul>
+            <ul><li>Write weekly vocabulary (English + Japanese)</li><li>Review sentences and questions out loud</li><li>Keep an English diary (5 to 8 sentences including opinions)</li><li>Use the Game Deck when possible</li></ul>
           </div>
         </div></div></div>
       </div>
@@ -713,8 +808,8 @@ body::after {
           <div class="acc-stripe"></div>
           <div class="acc-label">
             <div class="acc-tag" data-en="Adults" data-jp="大人クラス">大人クラス</div>
-            <div class="acc-title" data-en="Notes &amp; Good News" data-jp="課題とグッドニュース">課題とグッドニュース</div>
-            <div class="acc-sub" data-en="Moving away from scripts into real communication." data-jp="台本ではなく「伝え合う」英語へ。">台本ではなく「伝え合う」英語へ。</div>
+            <div class="acc-title" data-en="台本ではなく「伝え合う」英語へ" data-jp="台本ではなく「伝え合う」英語へ">台本ではなく「伝え合う」英語へ</div>
+            <div class="acc-sub" data-en="Moving away from scripts into real communication." data-jp="用意した答えではなく、本当に話す力を。">用意した答えではなく、本当に話す力を。</div>
           </div>
           <div class="acc-icon" aria-hidden="true">+</div>
         </button>
@@ -722,36 +817,36 @@ body::after {
           <div class="lang-jp">
             <h3>大人のよくある課題</h3>
             <ul>
-              <li>アウトプットが少ない。これが一番大きな問題です。準備なしで来て、質問されるのを待ってしまいます。</li>
-              <li>日本語の考え方に頼りすぎる。英語に切り替える必要があります。</li>
-              <li>曖昧な表現ばかり使う、または答えが出てこない。</li>
-              <li>授業外で英語を使わない。</li>
+              <li>話す量が少ない。これが一番大きな問題です。準備なしで来て、質問されるのを待ってしまいます。</li>
+              <li>日本語の発想に頼りすぎる。英語で考える練習が必要です。</li>
+              <li>「まあまあ」「特に何も」で終わらせる。週の内容に答えが出てこない。</li>
+              <li>授業以外で英語をほぼ使わない。</li>
             </ul>
-            <h3>グッドニュース</h3>
-            <p>大人に特別な才能は必要ありません。必要なのは、毎週の継続、好奇心、そして英語を使う意欲です。この環境はそれを実現するためのものです。来るなら、話す準備をしてきてください。</p>
+            <h3>それでも来てください</h3>
+            <p>大人に特別な才能は必要ありません。必要なのは、毎週続けること、好奇心、そして英語を使う意欲だけです。この学校はそのためにあります。来るなら、話す準備をしてきてください。それだけで、クラスは変わります。</p>
           </div>
           <div class="lang-en" style="display:none">
             <h3>Common adult problems</h3>
             <ul>
-              <li>Not speaking or sharing enough output. Honestly, this is the biggest problem. They come unprepared and expect to be interviewed.</li>
-              <li>Depending too much on Japanese logic. You need to code-switch.</li>
-              <li>Using vague language — "so-so," "maamaa" — or having no answer to the weekly questions.</li>
-              <li>Speaking too little outside class.</li>
+              <li>Not enough output. This is the biggest problem. Students come unprepared and wait to be asked questions.</li>
+              <li>Depending too much on Japanese logic. You need to think in English.</li>
+              <li>Vague answers. "So-so." "Nothing special." No answer to the weekly questions.</li>
+              <li>Almost no English outside of class.</li>
             </ul>
-            <h3>Good news</h3>
-            <p>Adults do not need talent. They need consistent weekly effort, curiosity, and a willingness to use English regularly. This is the best school for that. If you come, be prepared to talk.</p>
+            <h3>Come anyway</h3>
+            <p>Adults don't need talent. They need consistent weekly effort, curiosity, and a willingness to use English. That's what this school is for. Come prepared to talk. That one change makes the whole class different.</p>
           </div>
         </div></div></div>
       </div>
 
-    </div><!-- #acc-levels -->
-  </div><!-- .section-group -->
+    </div>
+  </div>
 
   <div class="footer">
     Bryan's English School &nbsp;·&nbsp; <span>Booha Adventure &amp; The Three Curricula</span>
   </div>
 
-</div><!-- .wrap -->
+</div>
 
 <script>
 (() => {
@@ -847,7 +942,7 @@ body::after {
 
   tabs.forEach(tab => tab.addEventListener('click', () => showLevel(tab.dataset.target)));
 
-  showLevel('acc-pre');
+  showLevel('acc-es1');
   setLang('jp');
 })();
 </script>
